@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table
 public class Review {
     @Id
-    private int id;
+    private int reviewId;
     private int planeId;
     private int userId;
     private String comment;

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Table
 public class Plane {
     @Id
-    private int id;
+    private int planeId;
     private String model;
     private int seats;
     private String image;

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table
 public class Client {
     @Id
-    private int id;
+    private int clientId;
     private String userName;
     private String email;
     private String password;

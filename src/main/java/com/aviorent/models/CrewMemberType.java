@@ -8,6 +8,6 @@ import javax.persistence.Table;
 @Table
 public class CrewMemberType {
     @Id
-    private int id;
+    private int crewMemberTypeId;
     private String type;
 }

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Table
 public class CrewMember {
     @Id
-    private int id;
+    private int crewMemberId;
     private String firstName;
     private String lastName;
 }

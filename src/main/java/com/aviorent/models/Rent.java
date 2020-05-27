@@ -10,14 +10,13 @@ import java.util.Date;
 @Table
 public class Rent {
     @Id
-    private int id;
-    private int userId;
-    private int planeId;
+    private int rentId;
     private Date dateStart;
     private Date dateEnd;
     private double price;
     private Date createdAt;
-    private int rentStatusId;
     private int passengers;
+    @ManyToOne
+    private RentStatus rentStatus;
 
 }

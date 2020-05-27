@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Table
 public class Pilot {
     @Id
-    private int id;
+    private int pilotId;
     private String firstName;
     private  String lastName;
     private int flightTime;
