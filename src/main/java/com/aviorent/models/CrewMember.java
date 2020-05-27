@@ -1,14 +1,23 @@
 package com.aviorent.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table
+@Table (name = "CrewMember")
 public class CrewMember {
     @Id
     private int crewMemberId;
+    @Column
     private String firstName;
+    @Column
     private String lastName;
+
+    @ManyToOne
+    @JoinColumn(name = "crewMembers")
+    private Plane plane;
+
+    @ManyToOne
+    @JoinColumn(name = "crewMembers")
+    private CrewMemberType crewMemberType;
+
 }
