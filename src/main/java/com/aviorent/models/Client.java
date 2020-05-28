@@ -17,11 +17,13 @@ public class Client {
     private String password;
     @Column(name = "passport")
     private String passport;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rentId")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
     private Set<Rent> allRents;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reviewId")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "madeByClient")
     private Set<Review> clientReviews;
+
+
 
 }

@@ -19,19 +19,16 @@ public class Plane {
     @Column  (name = "range")
     private int range;
 
-    @OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "crewMemberId")
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
     private Set<CrewMember> crewMembers;
 
-    @OneToMany// (mappedBy = "plane")
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
     private Set<Pilot> pilots;
 
 
-    /*@OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "pilotId")
-    private Set<Pilot> pilots;*/
-
-    @OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "reviewId")
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
     private Set<Review> reviews;
+
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
+    private Set<Rent> allRents;
 }

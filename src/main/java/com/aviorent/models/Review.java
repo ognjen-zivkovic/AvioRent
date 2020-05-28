@@ -12,9 +12,13 @@ public class Review {
     private String comment;
     @Column (name = "rating")
     private int rating;
+
     @ManyToOne
+    @JoinColumn(name = "planeId")
     private Plane plane;
+
     @ManyToOne
+    @JoinColumn(name = "clientId")
     private Client madeByClient;
 
 }

@@ -11,8 +11,7 @@ public class CrewMemberType {
     @Column (name = "type")
     private String type;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "crewMemberId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "crewMemberType")
     private Set<CrewMember> crewMembersOfType;
 
 }

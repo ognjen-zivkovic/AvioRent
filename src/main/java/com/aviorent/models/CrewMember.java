@@ -13,9 +13,11 @@ public class CrewMember {
     private String lastName;
 
     @ManyToOne
+    @JoinColumn( name = "planeId")
     private Plane plane;
 
     @ManyToOne
+    @JoinColumn( name = "crewMemberTypeId")
     private CrewMemberType crewMemberType;
 
 }

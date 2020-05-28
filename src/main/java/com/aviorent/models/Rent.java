@@ -21,13 +21,18 @@ public class Rent {
     private Date createdAt;
     @Column (name = "passengers")
     private int passengers;
+
     @ManyToOne
     @JoinColumn(name = "rentStatusId")
     private RentStatus rentStatus;
-    /*@ManyToOne
-    private RentStatus rentStatus;*/
+
 
     @ManyToOne
+    @JoinColumn(name = "clientId")
     private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "planeId")
+    private Plane plane;
 
 }
