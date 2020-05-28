@@ -1,24 +1,27 @@
 package com.aviorent.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "Client")
+@Table(name = "client")
 public class Client {
     @Id
     private int clientId;
-    @Column
+    @Column(name = "userName")
     private String userName;
-    @Column
+    @Column(name = "email")
     private String email;
-    @Column
+    @Column(name = "password")
     private String password;
-    @Column
+    @Column(name = "passport")
     private String passport;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rentId")
+    private Set<Rent> allRents;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reviewId")
+    private Set<Review> clientReviews;
 
 }

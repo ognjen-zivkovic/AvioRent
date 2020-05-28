@@ -4,21 +4,29 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table (name = "Plane")
+@Table (name = "plane")
 public class Plane {
     @Id
     private int planeId;
-    @Column
+    @Column (name = "model")
     private String model;
-    @Column
+    @Column (name = "seats")
     private int seats;
-    @Column
+    @Column  (name = "image")
     private String image;
-    @Column
+    @Column  (name = "maxSpeed")
     private int maxSpeed;
-    @Column
+    @Column  (name = "range")
     private int range;
 
-    @OneToMany(mappedBy = "plane")
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "crewMemberId")
     private Set<CrewMember> crewMembers;
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "pilotId")
+    private Set<Pilot> pilots;
+
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "reviewId")
+    private Set<Review> reviews;
 }

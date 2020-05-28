@@ -4,14 +4,15 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table (name = "CrewMemberType")
+@Table (name = "crewMemberType")
 public class CrewMemberType {
     @Id
     private int crewMemberTypeId;
-    @Column
+    @Column (name = "type")
     private String type;
 
-    @OneToMany(mappedBy = "crewMemberType")
-    private Set<CrewMember> crewMembers;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "crewMemberTypeId")
+    private Set<CrewMember> crewMembersOfType;
 
 }

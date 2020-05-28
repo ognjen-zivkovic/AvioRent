@@ -1,17 +1,20 @@
 package com.aviorent.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class Review {
     @Id
     private int reviewId;
-    private int planeId;
-    private int userId;
+    @Column (name = "comment")
     private String comment;
+    @Column (name = "rating")
     private int rating;
+    @ManyToOne
+    private Plane plane;
+    @ManyToOne
+    private Client madeByClient;
+
 }

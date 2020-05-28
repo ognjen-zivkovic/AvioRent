@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Rent")
+@Table(name = "rent")
 public class Rent {
     @Id
     private int rentId;
@@ -15,14 +15,16 @@ public class Rent {
     private Date dateStart;
     @Column(name = "dateEnd")
     private Date dateEnd;
-    @Column
+    @Column (name = "price")
     private double price;
-    @Column
+    @Column  (name = "createdAt")
     private Date createdAt;
-    @Column
+    @Column (name = "passengers")
     private int passengers;
     @ManyToOne
-    @JoinColumn(name = "rents")
     private RentStatus rentStatus;
+
+    @ManyToOne
+    private Client client;
 
 }

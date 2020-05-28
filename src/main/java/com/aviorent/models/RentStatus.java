@@ -5,15 +5,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "RentStatus")
+@Table(name = "rentStatus")
 public class RentStatus {
     @Id
     private int rentStatusId;
-    @Column
+    @Column (name = "status")
     private String status;
-    @OneToMany(mappedBy = "rentStatus")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rentId")
     private Set<Rent> rents;
-
-    public RentStatus() {
-    }
 }

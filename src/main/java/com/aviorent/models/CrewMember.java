@@ -3,21 +3,19 @@ package com.aviorent.models;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "CrewMember")
+@Table (name = "crewMember")
 public class CrewMember {
     @Id
     private int crewMemberId;
-    @Column
+    @Column (name = "firstName")
     private String firstName;
-    @Column
+    @Column (name = "lastName")
     private String lastName;
 
     @ManyToOne
-    @JoinColumn(name = "crewMembers")
     private Plane plane;
 
     @ManyToOne
-    @JoinColumn(name = "crewMembers")
     private CrewMemberType crewMemberType;
 
 }
