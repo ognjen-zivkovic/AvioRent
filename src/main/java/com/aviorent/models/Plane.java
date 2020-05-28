@@ -22,9 +22,14 @@ public class Plane {
     @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "crewMemberId")
     private Set<CrewMember> crewMembers;
-    @OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "pilotId")
+
+    @OneToMany// (mappedBy = "plane")
     private Set<Pilot> pilots;
+
+
+    /*@OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "pilotId")
+    private Set<Pilot> pilots;*/
 
     @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "reviewId")

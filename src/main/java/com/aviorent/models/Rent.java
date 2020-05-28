@@ -22,7 +22,10 @@ public class Rent {
     @Column (name = "passengers")
     private int passengers;
     @ManyToOne
+    @JoinColumn(name = "rentStatusId")
     private RentStatus rentStatus;
+    /*@ManyToOne
+    private RentStatus rentStatus;*/
 
     @ManyToOne
     private Client client;

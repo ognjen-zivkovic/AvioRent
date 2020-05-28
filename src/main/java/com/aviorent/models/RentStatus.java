@@ -9,9 +9,13 @@ import java.util.Set;
 public class RentStatus {
     @Id
     private int rentStatusId;
+
     @Column (name = "status")
     private String status;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rentId")
+
+    @OneToMany(mappedBy = "rentStatus")
     private Set<Rent> rents;
+    /*@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rentId")
+    private Set<Rent> rents;*/
 }

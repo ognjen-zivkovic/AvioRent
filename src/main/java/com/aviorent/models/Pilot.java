@@ -13,7 +13,9 @@ public class Pilot {
     private  String lastName;
     @Column (name = "flightTime")
     private int flightTime;
-
     @ManyToOne
-    private  Plane plane;
+    @JoinColumn(name = "planeId")
+    private Plane plane;
+    /*@ManyToOne
+    private  Plane plane;*/
 }
