@@ -12,7 +12,7 @@ public class CrewMemberType {
     private String type;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "crewMemberTypeId")
+    @JoinColumn(name = "crewMemberId")
     private Set<CrewMember> crewMembersOfType;
 
 }
