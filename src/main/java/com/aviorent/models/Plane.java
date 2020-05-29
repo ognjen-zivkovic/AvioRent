@@ -11,27 +11,27 @@ public class Plane {
     @Id
     private int planeId;
 
-    @NotBlank
-    @Size(max = 25)
+    @NotBlank(message = "Plane model is required")
+    @Size(max = 25, message = "Model must not exceed 25 characters")
     @Column (name = "model")
     private String model;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Number of seats is required")
+    @Positive(message = "Value must be positive")
     @Column (name = "seats")
     private int seats;
 
-    @NotBlank
+    @NotBlank(message = "Image is required")
     @Column  (name = "image")
     private String image;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Max speed is required")
+    @Positive(message = "Max speed value must be positive")
     @Column  (name = "maxSpeed")
     private int maxSpeed;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Range is required")
+    @Positive(message = "Range value must be positive")
     @Column  (name = "range")
     private int range;
 

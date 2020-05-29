@@ -13,7 +13,7 @@ public class Client {
     @GeneratedValue
     private int clientId;
 
-    @NotBlank
+    @NotBlank(message = "User name is required")
     @Size(max = 30, message = "User name must not exceed 30 characters.")
     @Column(name = "userName")
     private String userName;

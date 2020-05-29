@@ -12,7 +12,7 @@ public class RentStatus {
     @Id
     private int rentStatusId;
 
-    @NotBlank
+    @NotBlank(message = "Status is required")
     @Column (name = "status")
     private String status;
 

@@ -17,27 +17,27 @@ public class Rent {
     @Id
     private int rentId;
 
-    @FutureOrPresent
-    @NotBlank
+    @FutureOrPresent(message = "Selected date is not valid")
+    @NotBlank(message = "Start date is required")
     @Column(name = "dateStart")
     private Date dateStart;
 
-    @FutureOrPresent
-    @NotBlank
+    @FutureOrPresent(message = "Selected date is not valid")
+    @NotBlank(message = "End date is required")
     @Column(name = "dateEnd")
     private Date dateEnd;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price value must be positive")
     @Column (name = "price")
     private double price;
 
-    @NotBlank
+    @NotBlank(message = "Create date is required")
     @Column  (name = "createdAt")
     private Date createdAt;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Number of passengers is not valid")
+    @Positive(message = "Passengers value must be positive")
     @Column (name = "passengers")
     private int passengers;
 

@@ -14,12 +14,12 @@ public class Review {
     @Id
     private int reviewId;
 
-    @NotBlank
-    @Size(max = 255)
+
+    @Size(max = 255, message = "Comment size is not valid")
     @Column (name = "comment")
     private String comment;
 
-    @NotNull
+    @NotNull(message = "Rating is required")
     @Size(min = 1, max = 5)
     @Column (name = "rating")
     private int rating;

@@ -13,8 +13,8 @@ public class CrewMemberType {
     @Id
     private int crewMemberTypeId;
 
-    @NotBlank
-    @Size(max = 20)
+    @NotBlank(message = "Crew member type is required")
+    @Size(max = 20, message = "Crew member type must not exceed 20 characters.")
     @Column (name = "type")
     private String type;
 

@@ -12,13 +12,13 @@ public class CrewMember {
     @Id
     private int crewMemberId;
 
-    @NotBlank
-    @Size(max = 30)
+    @NotBlank(message = "First name is required.")
+    @Size(max = 30, message = " name must not exceed 30 characters.")
     @Column (name = "firstName")
     private String firstName;
 
-    @NotBlank
-    @Size(max = 35)
+    @NotBlank(message = "Last name is required.")
+    @Size(max = 35, message = "Last name must not exceed 35 characters.")
     @Column (name = "lastName")
     private String lastName;
 
