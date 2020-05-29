@@ -1,17 +1,29 @@
 package com.aviorent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table
 public class Pilot {
+
+    @GeneratedValue
     @Id
     private int pilotId;
+
+    @NotBlank
+    @Size(max = 30)
     @Column(name = "firstName")
     private String firstName;
-    @Column (name = "lastName")
-    private  String lastName;
-    @Column (name = "flightTime")
+
+    @NotBlank
+    @Size(max = 35)
+    @Column(name = "lastName")
+    private String lastName;
+
+    @NotNull
+    @Min(value = 2000)
+    @Column(name = "flightTime")
     private int flightTime;
 
     @ManyToOne
