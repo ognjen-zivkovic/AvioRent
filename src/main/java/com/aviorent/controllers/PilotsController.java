@@ -12,7 +12,8 @@ import javax.swing.text.View;
 public class PilotsController {
     @RequestMapping(value = "/index")
     public String Index(Model model) {
-        model.addAttribute("name", new String("Bojan"));
+
+        model.addAttribute("name", "Bojan");
         return "index";
     }
 }
