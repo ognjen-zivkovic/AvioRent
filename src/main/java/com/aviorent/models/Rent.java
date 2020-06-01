@@ -62,4 +62,91 @@ public class Rent {
     @JoinColumn(name = "planeId")
     private Plane plane;
 
+    public int getRentId() {
+        return rentId;
+    }
+
+    public void setRentId(int rentId) {
+        this.rentId = rentId;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public int getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(int passengers) {
+        this.passengers = passengers;
+    }
+
+    public String getDestinationFrom() {
+        return destinationFrom;
+    }
+
+    public void setDestinationFrom(String destinationFrom) {
+        this.destinationFrom = destinationFrom;
+    }
+
+    public String getDestinationTo() {
+        return destinationTo;
+    }
+
+    public void setDestinationTo(String destinationTo) {
+        this.destinationTo = destinationTo;
+    }
+
+    public boolean isRoundTrip() {
+        return isRoundTrip;
+    }
+
+    public void setRoundTrip(boolean roundTrip) {
+        isRoundTrip = roundTrip;
+    }
+
+    public RentStatus getRentStatus() {
+        return rentStatus;
+    }
+
+    public void setRentStatus(RentStatus rentStatus) {
+        this.rentStatus = rentStatus;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
 }
