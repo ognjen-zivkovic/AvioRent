@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crew members</title>
+</head>
+<body>
+<span th:each="member : ${members}">
+    <span th:text="${member.crewMemberId} + ': ' + ${member.firstName} + ' ' + ${member.lastName}"></span>
+    <br>
+</span>
+</body>
+</html>
