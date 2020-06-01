@@ -28,9 +28,9 @@ public class Client {
     @Column(name = "password")
     private String password;
 
-    @NotNull(message = "Phone number is required")
+    @NotBlank(message = "Phone number is required")
     @Column(name = "phone")
-    private int phone;
+    private String phone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
     private Set<Rent> allRents;
