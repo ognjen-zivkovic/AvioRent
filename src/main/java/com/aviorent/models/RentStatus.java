@@ -19,4 +19,19 @@ public class RentStatus {
     @OneToMany(mappedBy = "rentStatus")
     private Set<Rent> rents;
 
+    public int getRentStatusId() {
+        return rentStatusId;
+    }
+
+    public void setRentStatusId(int rentStatusId) {
+        this.rentStatusId = rentStatusId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

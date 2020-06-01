@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rentStatus</title>
+</head>
+<body>
+<span th:each="rent : ${rentstatus}">
+    <span th:text="${rent.rentStatusId} + ': ' + ${rent.status}"></span>
+    <br>
+</span>
+</body>
+</html>
