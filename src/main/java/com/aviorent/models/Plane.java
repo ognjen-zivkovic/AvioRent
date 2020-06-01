@@ -35,15 +35,13 @@ public class Plane {
     @Column  (name = "range")
     private int range;
 
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price value must be positive")
+    @Column (name = "price")
+    private double price;
+
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
     private Set<CrewMember> crewMembers;
-
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
-    private Set<Pilot> pilots;
-
-
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
-    private Set<Review> reviews;
 
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
     private Set<Rent> allRents;

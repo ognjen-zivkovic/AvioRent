@@ -27,10 +27,6 @@ public class Rent {
     @Column(name = "dateEnd")
     private Date dateEnd;
 
-    @NotNull(message = "Price is required")
-    @Positive(message = "Price value must be positive")
-    @Column (name = "price")
-    private double price;
 
     @NotBlank(message = "Create date is required")
     @Column  (name = "createdAt")
@@ -40,6 +36,18 @@ public class Rent {
     @Positive(message = "Passengers value must be positive")
     @Column (name = "passengers")
     private int passengers;
+
+    @NotBlank(message = "Star destination is required")
+    @Column (name = "destinationFrom")
+    private String destinationFrom;
+
+    @NotBlank(message = "End destination is required")
+    @Column (name = "destinationTo")
+    private String destinationTo;
+
+
+    @Column (name = "isRoundTrip")
+    private boolean isRoundTrip;
 
     @ManyToOne
     @JoinColumn(name = "rentStatusId")

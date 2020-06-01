@@ -28,16 +28,13 @@ public class Client {
     @Column(name = "password")
     private String password;
 
-    @Size(min = 9, max = 9, message = "Invalid passport length.")
-    @NotBlank(message = "Passport is required.")
-    @Column(name = "passport")
-    private String passport;
+    @NotNull(message = "Phone number is required")
+    @Column(name = "phone")
+    private int phone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
     private Set<Rent> allRents;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "madeByClient")
-    private Set<Review> clientReviews;
 
 
 
