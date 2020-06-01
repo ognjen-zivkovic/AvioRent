@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rent List</title>
+</head>
+<body>
+    <h2>Rents</h2>
+    <table border="1px solid">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateStart</th>
+                <th>DateEnd</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Passengers</th>
+                <th>Plane</th>
+                <th>Client</th>
+                <th>Status</th>
+                <th>A</th>
+                <th>D</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="rent : ${rents}">
+                <td th:text="${rent.rentId}"></td>
+                <td th:text="${rent.dateStart}"></td>
+                <td th:text="${rent.dateEnd}"></td>
+                <td th:text="${rent.destinationFrom}"></td>
+                <td th:text="${rent.destinationTo}"></td>
+                <td th:text="${rent.passengers}"></td>
+                <td th:text="${rent.plane}"></td>
+                <td th:text="${rent.client}"></td>
+                <td th:text="${rent.rentStatus}"></td>
+                <td><button style="background-color: blue; color: white">Approve</button></td>
+                <td><button style="background-color: red; color: white">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
