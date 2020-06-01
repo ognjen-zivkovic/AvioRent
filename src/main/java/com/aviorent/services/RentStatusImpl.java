@@ -1,13 +1,12 @@
 package com.aviorent.services;
 
-import com.aviorent.repositories.ClientRepository;
+import com.aviorent.repositories.RentStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClientServiceImpl implements ClientService{
+public class RentStatusImpl implements RentStatusService {
 
     @Autowired
-
-    private ClientRepository clientRepository;
+    private RentStatusRepository rentStatusRepository;
 }
