@@ -1,5 +1,9 @@
 package com.aviorent.services;
 
-public interface RentService {
+import com.aviorent.models.Rent;
 
+import java.util.List;
+
+public interface RentService {
+    List<Rent> getAll();
 }
