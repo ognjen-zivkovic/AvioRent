@@ -19,7 +19,6 @@ public class CrewMemberTypeController {
     public String crewMemberTypes(Model model)
     {
         List<CrewMemberType> types = this.crewMemberTypeService.getAll();
-       // System.out.println(types.get(0).getCrewMemberTypeId());
         model.addAttribute("types", types);
         return "crewMemberTypes";
     }
