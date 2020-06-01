@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <meta charset="UTF-8">
+    <title>Crew Member Types</title>
+</head>
+<body>
+<span th:each="typ : ${types}">
+    <span th:text="${typ.crewMemberTypeId} + ': ' + ${typ.type}"></span>
+    <br>
+</span>
+
+</body>
+</html>

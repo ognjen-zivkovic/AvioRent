@@ -21,4 +21,19 @@ public class CrewMemberType {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "crewMemberType")
     private Set<CrewMember> crewMembersOfType;
 
+    public int getCrewMemberTypeId() {
+        return crewMemberTypeId;
+    }
+
+    public void setCrewMemberTypeId(int crewMemberTypeId) {
+        this.crewMemberTypeId = crewMemberTypeId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
