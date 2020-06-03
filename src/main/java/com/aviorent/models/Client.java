@@ -75,11 +75,5 @@ public class Client {
         this.phone = phone;
     }
 
-    public void setAllRents(Set<Rent> allRents) {
-        this.allRents = allRents;
-    }
 
-    public Set<Rent> getAllRents() {
-        return allRents;
-    }
 }
