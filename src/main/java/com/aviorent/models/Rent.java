@@ -18,17 +18,13 @@ public class Rent {
     private long rentId;
 
     @FutureOrPresent(message = "Selected date is not valid")
-    @NotBlank(message = "Start date is required")
     @Column(name = "dateStart")
     private Date dateStart;
 
     @FutureOrPresent(message = "Selected date is not valid")
-    @NotBlank(message = "End date is required")
     @Column(name = "dateEnd")
     private Date dateEnd;
 
-
-    @NotBlank(message = "Create date is required")
     @Column  (name = "createdAt")
     private Date createdAt;
 

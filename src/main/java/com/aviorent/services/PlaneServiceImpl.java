@@ -40,6 +40,4 @@ public class PlaneServiceImpl implements PlaneService {
         Plane persistedPlane = this.planeRepository.save(plane);
         return persistedPlane;
     }
-
-
 }

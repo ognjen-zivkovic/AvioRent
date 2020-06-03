@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RentServiceImpl implements RentService {
@@ -17,5 +18,29 @@ public class RentServiceImpl implements RentService {
     @Override
     public List<Rent> getAll() {
         return rentRepository.findAll();
+    }
+
+    @Override
+    public Rent create(Rent rent) {
+        Rent persistedRent = rentRepository.save(rent);
+
+        return persistedRent;
+    }
+
+    @Override
+    public Optional<Rent> getById(long id) {
+        return rentRepository.findById(id);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        rentRepository.deleteById(id);
+    }
+
+    @Override
+    public Rent update(Rent rent) {
+        Rent persistedRent = rentRepository.save(rent);
+
+        return persistedRent;
     }
 }
