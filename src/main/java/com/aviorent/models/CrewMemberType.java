@@ -11,7 +11,7 @@ import java.util.Set;
 public class CrewMemberType {
     @GeneratedValue
     @Id
-    private int crewMemberTypeId;
+    private long crewMemberTypeId;
 
     @NotBlank(message = "Crew member type is required")
     @Size(max = 20, message = "Crew member type must not exceed 20 characters.")
@@ -21,11 +21,11 @@ public class CrewMemberType {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "crewMemberType")
     private Set<CrewMember> crewMembersOfType;
 
-    public int getCrewMemberTypeId() {
+    public long getCrewMemberTypeId() {
         return crewMemberTypeId;
     }
 
-    public void setCrewMemberTypeId(int crewMemberTypeId) {
+    public void setCrewMemberTypeId(long crewMemberTypeId) {
         this.crewMemberTypeId = crewMemberTypeId;
     }
 

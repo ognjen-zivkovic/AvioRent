@@ -11,7 +11,7 @@ public class Client {
 
     @Id
     @GeneratedValue
-    private int clientId;
+    private long clientId;
 
     @NotBlank(message = "User name is required")
     @Size(max = 30, message = "User name must not exceed 30 characters.")
@@ -35,7 +35,7 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
     private Set<Rent> allRents;
 
-    public int getClientId() {
+    public long getClientId() {
         return clientId;
     }
 
@@ -55,7 +55,7 @@ public class Client {
         return phone;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(long clientId) {
         this.clientId = clientId;
     }
 

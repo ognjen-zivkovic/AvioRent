@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 public class CrewMember {
     @GeneratedValue
     @Id
-    private int crewMemberId;
+    private long crewMemberId;
 
     @NotBlank(message = "First name is required.")
     @Size(max = 30, message = " name must not exceed 30 characters.")
@@ -30,11 +30,11 @@ public class CrewMember {
     @JoinColumn( name = "crewMemberTypeId")
     private CrewMemberType crewMemberType;
 
-    public int getCrewMemberId() {
+    public long getCrewMemberId() {
         return crewMemberId;
     }
 
-    public void setCrewMemberId(int crewMemberId) {
+    public void setCrewMemberId(long crewMemberId) {
         this.crewMemberId = crewMemberId;
     }
 

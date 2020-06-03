@@ -15,7 +15,7 @@ import java.util.Date;
 public class Rent {
     @GeneratedValue
     @Id
-    private int rentId;
+    private long rentId;
 
     @FutureOrPresent(message = "Selected date is not valid")
     @NotBlank(message = "Start date is required")
@@ -62,11 +62,11 @@ public class Rent {
     @JoinColumn(name = "planeId")
     private Plane plane;
 
-    public int getRentId() {
+    public long getRentId() {
         return rentId;
     }
 
-    public void setRentId(int rentId) {
+    public void setRentId(long rentId) {
         this.rentId = rentId;
     }
 

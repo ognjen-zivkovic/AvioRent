@@ -10,7 +10,7 @@ import java.util.Set;
 public class RentStatus {
     @GeneratedValue
     @Id
-    private int rentStatusId;
+    private long rentStatusId;
 
     @NotBlank(message = "Status is required")
     @Column (name = "status")
@@ -19,11 +19,11 @@ public class RentStatus {
     @OneToMany(mappedBy = "rentStatus")
     private Set<Rent> rents;
 
-    public int getRentStatusId() {
+    public long getRentStatusId() {
         return rentStatusId;
     }
 
-    public void setRentStatusId(int rentStatusId) {
+    public void setRentStatusId(long rentStatusId) {
         this.rentStatusId = rentStatusId;
     }
 

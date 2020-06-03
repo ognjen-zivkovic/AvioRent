@@ -7,9 +7,10 @@ import java.util.Set;
 @Entity
 @Table (name = "plane")
 public class Plane {
+
     @GeneratedValue
     @Id
-    private int planeId;
+    private long planeId;
 
     @NotBlank(message = "Plane model is required")
     @Size(max = 25, message = "Model must not exceed 25 characters")
@@ -46,11 +47,11 @@ public class Plane {
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
     private Set<Rent> allRents;
 
-    public int getPlaneId() {
+    public long getPlaneId() {
         return planeId;
     }
 
-    public void setPlaneId(int planeId) {
+    public void setPlaneId(long planeId) {
         this.planeId = planeId;
     }
 
