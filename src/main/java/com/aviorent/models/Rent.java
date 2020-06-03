@@ -15,7 +15,7 @@ import java.util.Date;
 public class Rent {
     @GeneratedValue
     @Id
-    private int rentId;
+    private long rentId;
 
     @FutureOrPresent(message = "Selected date is not valid")
     @NotBlank(message = "Start date is required")
@@ -27,10 +27,6 @@ public class Rent {
     @Column(name = "dateEnd")
     private Date dateEnd;
 
-    @NotNull(message = "Price is required")
-    @Positive(message = "Price value must be positive")
-    @Column (name = "price")
-    private double price;
 
     @NotBlank(message = "Create date is required")
     @Column  (name = "createdAt")
@@ -40,6 +36,18 @@ public class Rent {
     @Positive(message = "Passengers value must be positive")
     @Column (name = "passengers")
     private int passengers;
+
+    @NotBlank(message = "Star destination is required")
+    @Column (name = "destinationFrom")
+    private String destinationFrom;
+
+    @NotBlank(message = "End destination is required")
+    @Column (name = "destinationTo")
+    private String destinationTo;
+
+
+    @Column (name = "isRoundTrip")
+    private boolean isRoundTrip;
 
     @ManyToOne
     @JoinColumn(name = "rentStatusId")
@@ -54,4 +62,91 @@ public class Rent {
     @JoinColumn(name = "planeId")
     private Plane plane;
 
+    public long getRentId() {
+        return rentId;
+    }
+
+    public void setRentId(long rentId) {
+        this.rentId = rentId;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public int getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(int passengers) {
+        this.passengers = passengers;
+    }
+
+    public String getDestinationFrom() {
+        return destinationFrom;
+    }
+
+    public void setDestinationFrom(String destinationFrom) {
+        this.destinationFrom = destinationFrom;
+    }
+
+    public String getDestinationTo() {
+        return destinationTo;
+    }
+
+    public void setDestinationTo(String destinationTo) {
+        this.destinationTo = destinationTo;
+    }
+
+    public boolean isRoundTrip() {
+        return isRoundTrip;
+    }
+
+    public void setRoundTrip(boolean roundTrip) {
+        isRoundTrip = roundTrip;
+    }
+
+    public RentStatus getRentStatus() {
+        return rentStatus;
+    }
+
+    public void setRentStatus(RentStatus rentStatus) {
+        this.rentStatus = rentStatus;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
 }
