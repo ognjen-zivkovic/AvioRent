@@ -1,5 +1,6 @@
 package com.aviorent.services;
 
+import com.aviorent.models.Client;
 import com.aviorent.models.Rent;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface RentService {
     Optional<Rent> getById(long id);
     void deleteById(long id);
     Rent update(Rent rent);
+    List<Rent> primer(Client client);
+
 }

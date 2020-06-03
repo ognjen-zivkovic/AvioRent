@@ -1,5 +1,6 @@
 package com.aviorent.services;
 
+import com.aviorent.models.Client;
 import com.aviorent.models.Rent;
 import com.aviorent.repositories.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,9 @@ public class RentServiceImpl implements RentService {
 
         return persistedRent;
     }
+    public List<Rent> primer(Client client)
+    {
+     return this.rentRepository.findByClient(client);
+    }
+
 }
