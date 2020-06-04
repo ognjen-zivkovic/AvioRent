@@ -10,19 +10,19 @@
 <body>
 
     <div class="signup_wrapper">
-        <form action="" class="form">
+        <form th:action="@{/signup}" method="POST" class="form">
             <img th:src="@{/img/logo.png}" alt="" class="logo_form">
             <h1>Fly Airlines</h1>
             <label for="username">Username</label>
-            <input name="username" type="text">
+            <input th:field="*{client.userName}" name="username" type="text">
             <label for="email">Email</label>
-            <input name="email" type="text">
+            <input th:field="*{client.email}" name="email" type="text">
             <label for="pass">Password</label>
-            <input name="pass" type="password">
-            <label for="passretype">Retype Password</label>
-            <input name="passretype" type="password">
+            <input th:field="*{client.password}" name="pass" type="password">
+            <!--<label for="passretype">Retype Password</label>
+            <input th:field="*{password}" name="passretype" type="password">-->
             <label for="phone">Phone</label>
-            <input name="phone" type="text">
+            <input th:field="*{client.phone}" name="phone" type="text">
             <br>
             <button class="btn" type="submit">Sign Up</button>
             <a class="link" href="">Cancel</a>

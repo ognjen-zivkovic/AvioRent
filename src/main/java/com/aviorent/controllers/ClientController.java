@@ -5,9 +5,11 @@ import com.aviorent.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -22,6 +24,40 @@ public class ClientController {
         model.addAttribute("clients", clients);
         return "clients";
     }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public ModelAndView signup(){
+        ModelAndView model = new ModelAndView();
+        Client client = new Client();
+        model.addObject("client", client);
+        model.setViewName("signup");
+
+        return model;
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public ModelAndView createUser(@Valid Client client, BindingResult bindingResult){
+        ModelAndView model = new ModelAndView();
+        Client clientExists = clientService.findClientByEmail(client.getEmail());
+
+        if(clientExists != null){
+            bindingResult.rejectValue("email", "error.client", "This e-mail already exists!");
+            model = new ModelAndView();
+            model.setViewName("/signup");
+        }
+        if (bindingResult.hasErrors()){
+            model.setViewName("/signup");
+        }
+        else{
+            clientService.save(client);
+            model.addObject("msg", "User has been registered successfully");
+            model.addObject("client", new Client());
+            model.setViewName("/signup");
+        }
+
+        return model;
+    }
+
 
 
 
