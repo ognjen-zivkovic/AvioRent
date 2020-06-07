@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avio Rent</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" th:href="@{main.css}" href="../static/main.css">
 </head>
 <body>
     <nav class="nav">
@@ -24,26 +24,31 @@
     </nav>
 
     <div class="form_wrapper">
-        <form action="" class="form">
-            <img src="logo.png" alt="" class="logo_form">
+        <form th:action="@{/save}" method="POST" class="form" th:object="${crewMember}">
+            <img th:src="@{/img/logo.png}" alt="" class="logo_form">
             <h1>Add Crew Member</h1>
-            <label for="fromDestination">First Name</label>
-            <input name="fromDestination" type="text">
-            <label for="toDesination">Last name</label>
-            <input name="toDesination" type="text">
-            <label for="planeModel">Plane Model</label>
-            <select name="planeModel">
-                <option value="MK 24">MK 24</option>
-                <option value="HG 24">HG 24</option>
-                <option value="Cessna 24">Cessna 24</option>
+            <label for="firstName">First Name</label>
+            <input th:field="*{firstName}" name="firstName" type="text">
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:class="help-block">First Name Errors</span>
+            <label for="lastName">Last Name</label>
+            <input th:field="*{lastName}" name="lastName" type="text">
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:class="help-block">Last Name Errors</span>
+
+            <label>Crew Member Type</label>
+            <select th:field="*{crewMemberType}">
+                <option th:each="t : ${type}" th:value="${t.crewMemberTypeId}" th:text="${t.type}"></option>
             </select>
+
+            <label>Plane Model</label>
+            <select th:field="*{plane}">
+                <option th:each="p : ${plane}" th:value="${p.getPlaneId()}" th:text="${p.getModel()}"></option>
+            </select>
+
+            <button  class="btn" type="submit">Submit</button>
+
         </form>
     </div>
 
-    <div class="form_wrapper--modifier">
-        <form class="form" action="">
-            <a href="planeselection.html" class="btn btn--round gradient_bg-animatio" type="submit">Add Crew Member</a>
-        </form>
-    </div>
+
 </body>
 </html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avio Rent</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" th:href="@{main.css}" href="../static/main.css">
 </head>
 <body>
     <nav class="nav">
@@ -26,7 +26,7 @@
     <div class="container">
         <table class="table">
             <div class="header_wrapper">
-                <img src="logo.png" alt="" class="logo_form">
+                <img th:src="@{/img/logo.png}" alt="" class="logo_form">
                 <h1>Crew List</h1>
             </div>
             <tr>
@@ -37,19 +37,11 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            <tr>
-                <td>Danilo</td>
-                <td>Ilic</td>
-                <td>pilot</td>
-                <td>Cessna 247</td>
-                <td><button class="">Edit</button></td>
-                <td><button class="">Delete</button></td>
-            </tr>
-            <tr>
-                <td>Petar</td>
-                <td>Zivkovic</td>
-                <td>pilot</td>
-                <td>Cessna 231</td>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.firstName}"></td>
+                <td th:text="${member.lastName}"></td>
+                <td th:text="${member.crewMemberType.type}"></td>
+                <td th:text="${member.plane.model}"></td>
                 <td><button class="">Edit</button></td>
                 <td><button class="">Delete</button></td>
             </tr>
@@ -58,7 +50,7 @@
 
     <div class="form_wrapper--modifier">
         <form class="form" action="">
-            <a href="planeselection.html" class="btn btn--round gradient_bg-animatio" type="submit">Add Crew Member</a>
+            <a href="crewmemberadd" class="btn" type="submit">Add Crew Member</a>
         </form>
     </div>
 </body>
