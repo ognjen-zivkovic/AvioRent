@@ -25,6 +25,15 @@ public class ClientController {
         return "clients";
     }
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+        public ModelAndView login() {
+        ModelAndView model = new ModelAndView();
+
+        model.setViewName("/index");
+
+        return model;
+    }
+
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView signup(){
         ModelAndView model = new ModelAndView();
@@ -39,7 +48,6 @@ public class ClientController {
     public ModelAndView createUser(@Valid Client client, BindingResult bindingResult){
         ModelAndView model = new ModelAndView();
         Client clientExists = clientService.findClientByEmail(client.getEmail());
-
         if(clientExists != null){
             bindingResult.rejectValue("email", "error.client", "This e-mail already exists!");
             model = new ModelAndView();
@@ -57,9 +65,5 @@ public class ClientController {
 
         return model;
     }
-
-
-
-
 
 }
