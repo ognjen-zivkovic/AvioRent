@@ -43,4 +43,9 @@ public class ClientServiceImpl implements ClientService{
             return persistedClient;
     }
 
+    @Override
+    public Client findClientByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
+
 }

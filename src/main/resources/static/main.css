@@ -1,0 +1,143 @@
+@charset "UTF-8";
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #f7f1e3;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5 {
+    padding: 0;
+    margin: 0;
+}
+
+.black_overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.75);
+    left: 0;
+    top: 0;
+}
+
+.black_overlay .🧠 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-100%, -50%);
+    transform: translate(-100%, -50%);
+    font-family: 'Raleway', sans-serif;
+    font-style: italic;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 2rem;
+    letter-spacing: 0;
+    width: 400px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.video_wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+}
+
+.video_intro {
+    width: 100vw;
+    z-index: -1;
+}
+
+.video_intro::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.login_wrapper {
+    position: absolute;
+    background-color: #f7f1e3;
+    min-width: 420px;
+    height: 100%;
+    right: 0;
+}
+
+.signup_wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.logo_form {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 4rem;
+}
+
+.form {
+    padding: 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.form h1 {
+    text-align: center;
+    padding: 2rem;
+    color: #474787;
+}
+
+.form input, .form select, .form label, .form button {
+    margin: 0.5rem;
+    font-size: 1rem;
+}
+
+.form input {
+    padding: 1rem;
+    border: none;
+    background: none;
+    border-radius: 3px;
+    border: 1px solid #d1ccc0;
+}
+
+.btn {
+    padding: 1rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 3px;
+    background: #706fd3;
+    color: #f7f1e3;
+    font-size: 1rem;
+    -webkit-transition: all ease-Out 0.3s;
+    transition: all ease-Out 0.3s;
+}
+
+.btn:hover {
+    background-color: #474787;
+}
+
+.link {
+    color: #706fd3;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1rem;
+    -webkit-transition: all ease-Out 0.3s;
+    transition: all ease-Out 0.3s;
+}
+
+.link:hover {
+    color: #474787;
+}
+/*# sourceMappingURL=main.css.map */

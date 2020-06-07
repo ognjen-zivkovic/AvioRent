@@ -2,11 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>✈ Avio Rent</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{main.css}" href="../static/main.css">
 </head>
 <body>
-    <h1>Hello</h1>
-    <h2 th:text="${name}"></h2>
-    <p>#[[name]]#</p>
+
+    <!-- Background Video Section -->
+    <div class="video_wrapper">
+        <video class="video_intro" autoplay loop controls>
+            <source th:src="@{/video/bg.mp4}" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+    <div class="black_overlay">
+        <h1 class="🧠" id="demo"></h1>
+    </div>
+    <div class="login_wrapper">
+        <form action="" class="form">
+            <img th:src="@{/img/logo.png}" alt="" class="logo_form">
+            <h1>Fly Airlines</h1>
+            <label for="username">Username</label>
+            <input name="username" type="text">
+            <label for="pass">Password</label>
+            <input name="pass" type="password">
+            <br>
+            <button class="btn">Sign In</button>
+            <a class="link" href="signup.html">Sign Up</a>
+        </form>
+    </div>
+
+<script>
+
+</script>
 </body>
 </html>
