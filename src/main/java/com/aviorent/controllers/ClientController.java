@@ -25,6 +25,19 @@ public class ClientController {
         return "clients";
     }
 
+    @GetMapping("/client")
+    public String client(Model model) {
+        Client client = this.clientService.getById(503).get();
+        model.addAttribute("client", client);
+        return "client";
+    }
+
+    @RequestMapping(value = "/client", method = RequestMethod.POST)
+    public String updateClient(@ModelAttribute Client client) {
+        clientService.update(client);
+        return "client";
+    }
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
         public ModelAndView login() {
         ModelAndView model = new ModelAndView();
@@ -40,7 +53,6 @@ public class ClientController {
         Client client = new Client();
         model.addObject("client", client);
         model.setViewName("signup");
-
         return model;
     }
 
