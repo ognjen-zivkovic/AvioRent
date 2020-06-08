@@ -63,10 +63,19 @@ public class ClientController {
         if(clientExists != null){
             bindingResult.rejectValue("email", "error.client", "This e-mail already exists!");
             model = new ModelAndView();
+            model.addObject("Userexists", "User already exists");
             model.setViewName("/signup");
+            Client client2 = new Client();
+            client2.setPhone("");
+            client2.setUserName("");
+
+            model.addObject("client", client2);
+            return model;
         }
-        if (bindingResult.hasErrors()){
+        else if (bindingResult.hasErrors()){
             model.setViewName("/signup");
+
+            return model;
         }
         else{
             clientService.save(client);
