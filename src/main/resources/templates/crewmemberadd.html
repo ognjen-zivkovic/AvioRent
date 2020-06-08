@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avio Rent</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{main.css}" href="../static/main.css">
+    <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
 </head>
 <body>
     <nav class="nav">
@@ -25,14 +25,15 @@
 
     <div class="form_wrapper">
         <form th:action="@{/save}" method="POST" class="form" th:object="${crewMember}">
+            <input type="hidden" th:field="*{crewMemberId}" id="crewMemberId"/>
             <img th:src="@{/img/logo.png}" alt="" class="logo_form">
             <h1>Add Crew Member</h1>
             <label for="firstName">First Name</label>
-            <input th:field="*{firstName}" name="firstName" type="text">
-            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:class="help-block">First Name Errors</span>
+            <input th:field="*{firstName}" name="firstName" type="text" id="firstName">
+            <span style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:class="help-block">First Name Errors</span>
             <label for="lastName">Last Name</label>
-            <input th:field="*{lastName}" name="lastName" type="text">
-            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:class="help-block">Last Name Errors</span>
+            <input th:field="*{lastName}" name="lastName" type="text" id="lastName">
+            <span style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:class="help-block">Last Name Errors</span>
 
             <label>Crew Member Type</label>
             <select th:field="*{crewMemberType}">

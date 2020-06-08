@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -49,6 +50,8 @@ public class CrewMemberController {
     public String saveCrewMember(@Valid CrewMember crewMember, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
+            model.addAttribute("type", crewMemberTypeService.getAll());
+            model.addAttribute("plane", planeService.getAll());
             return "/crewmemberadd";
         }
         else{
@@ -57,12 +60,20 @@ public class CrewMemberController {
         }
     }
 
-   /* @RequestMapping("/admin/post/delete/{id}")
+    @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttrs) {
-        postService.delete(id);
-        redirectAttrs.addFlashAttribute("message", "Post was deleted!");
-        return "redirect:/admin/posts";
-    }*/
+        crewMemberService.deleteById(id);
+        redirectAttrs.addFlashAttribute("message", "Crew Member was deleted!");
+        return "redirect:/crewmemberlist";
+    }
 
+
+    @RequestMapping("/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("crewMember", crewMemberService.getById(id));
+        model.addAttribute("type", crewMemberTypeService.getAll());
+        model.addAttribute("plane", planeService.getAll());
+        return "/crewmemberadd";
+    }
 
 }
