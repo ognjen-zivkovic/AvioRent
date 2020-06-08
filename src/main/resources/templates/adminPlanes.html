@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <meta charset="UTF-8">
+    <title>Planes</title>
+    <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.css}">
+    <script src="https://use.fontawesome.com/37ac8fd460.js"></script>
+
+    <style>
+        div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+            position: relative;
+
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .minus{
+            position: absolute !important;
+            left: 90% !important;
+            bottom:82% !important;
+            font-size: 27px !important;
+            color: red;
+
+        }
+        .modal-body{
+            min-height: 30vh;
+            display: flow-root;
+        }
+        #image{
+            margin-top: 60px;
+            margin-bottom: -15px;
+        }
+    </style>
+</head>
+<header class="main-header">
+
+    <a href="#" class="logo">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="img/logo.png"
+                     class="img-circle" alt="User Image">
+            </div>
+        </div>
+    </a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+    </nav>
+</header>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">MANAGE</li>
+                <li><a href=""><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Airplanes
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Airplanes</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i
+                                    class="fa fa-plus"></i> New</a>
+                        </div>
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered">
+                                <thead>
+                                <th>Images</th>
+                                <th>Model</th>
+                                <th>Seats</th>
+                                <th>Max speed</th>
+                                <th>Range</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Tools</th>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="plane : ${planes}">
+                                    <tr>
+                                        <td>
+
+                                            <th:block th:if="${plane.getImages().size() != 0}">
+                                                <img  th:src="@{${plane.getImages().get(0).imagePath}}" height='35px' width='35px' th:id="'planeTableImg'+${plane.planeId}"/>
+                                            </th:block>
+
+
+                                            <span class='pull-right'><a href='#edit_photo' class='photo'
+                                                                        data-toggle='modal'  th:attr="data-id=${plane.getPlaneId()}"><i
+                                                    class='fa fa-edit'></i></a></span>
+                                        </td>
+
+
+                                        <td>
+                                            <span class='pull-right' th:text="${plane.model}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${plane.seats}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${plane.maxSpeed}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${plane.range}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${plane.price}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class="label label-success">Free</span>
+                                        </td>
+
+                                        <td>
+                                            <button class='btn btn-success btn-sm edit btn-flat'
+                                                    th:attr="data-id=${plane.getPlaneId()}"><i class='fa fa-edit'></i>Edit
+                                            </button>
+                                            <button class='btn btn-danger btn-sm delete btn-flat'
+                                                    th:attr="data-id=${plane.getPlaneId()}"><i class='fa fa-trash'></i>Delete
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- Add -->
+<div class="modal fade" id="addnew">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Add Airplane</b></h4>
+            </div>
+            <br>
+            <form class="form-horizontal" method="POST" action="/newPlane" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="model" class="col-sm-3 control-label">Model</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control newPlane" id="model" name="model" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="seats" class="col-sm-3 control-label">Seats</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control newPlane" id="seats" name="seats" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="maxSpeed" class="col-sm-3 control-label">Max speed</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control newPlane" id="maxSpeed" name="maxSpeed" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="range" class="col-sm-3 control-label">Range</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control newPlane" id="range" name="range" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="col-sm-3 control-label">Price</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control newPlane" id="price" name="price" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="images" class="col-sm-3 control-label">Images</label>
+
+                    <div class="col-sm-9">
+                        <input type="file" id="images" name="images" multiple>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i
+                            class="fa fa-close"></i> Close
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save
+                    </button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Add End -->
+
+<!-- Delete -->
+<div class="modal fade" id="delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Deleting...</b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="/deletePlane">
+                    <input type="hidden" class="planeid" name="planeId">
+                    <div class="text-center">
+                        <p>DELETE AIRPLANE</p>
+                        <h2 class="bold planeModel"></h2>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i
+                        class="fa fa-close"></i> Close
+                </button>
+                <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete
+                </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete End -->
+
+<!-- Edit -->
+<div class="modal fade" id="edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Edit Airplane</b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="/editPlane">
+                    <input type="hidden" class="planeid" name="planeId">
+                    <div class="form-group">
+                        <label for="edit_model" class="col-sm-3 control-label">Model</label>
+
+                        <div class="col-sm-9">
+                            <input required type="text" class="form-control edit_model" id="edit_model" name="model">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_seats" class="col-sm-3 control-label">Seats</label>
+
+                        <div class="col-sm-9">
+                            <input required type="text" class="form-control edit_seats" id="edit_seats" name="seats">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_maxspeed" class="col-sm-3 control-label">Max speed</label>
+
+                        <div class="col-sm-9">
+                            <input required type="text" class="form-control edit_maxspeed" id="edit_maxspeed"
+                                   name="maxSpeed">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_range" class="col-sm-3 control-label">Range</label>
+
+                        <div class="col-sm-9">
+                            <input required type="text" class="form-control edit_range" id="edit_range" name="range">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_price" class="col-sm-3 control-label">Price</label>
+
+                        <div class="col-sm-9">
+                            <input required type="text" class="form-control edit_price" id="edit_price" name="price">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i
+                        class="fa fa-close"></i> Close
+                </button>
+                <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-check-square-o"></i>
+                    Update
+                </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit End -->
+
+<!-- Update Images -->
+<div class="modal fade" id="edit_photo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b class="imageEditHeader"> images<span></span></b></h4>
+            </div>
+            <div class="modal-body" id="imageModal">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Update Images End -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/adminPlanes.js"></script>
+
+</body>
+</html>
