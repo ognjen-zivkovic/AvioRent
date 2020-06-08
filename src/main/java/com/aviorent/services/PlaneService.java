@@ -1,6 +1,7 @@
 package com.aviorent.services;
 
 import com.aviorent.models.Plane;
+import com.aviorent.models.PlaneImage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface PlaneService {
     Optional<Plane> getById(long id);
     void deleteById(long id);
     Plane update(Plane plane);
+
 }
