@@ -43,7 +43,7 @@ $(function () {
                 $(".gallery").remove();
                 $(".editImagesForm").remove();
                 var images = response.images;
-
+                toastr.success("Image successfully removed.");
                 if (images.length > 0) {
                     $('#imageModal').append('<table>');
                     $('#imageModal').append('<tr>');

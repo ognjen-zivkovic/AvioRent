@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/toastr.css}">
     <script src="https://use.fontawesome.com/37ac8fd460.js"></script>
 
     <style>
@@ -162,6 +163,10 @@
         </section>
     </div>
 </div>
+
+
+
+
 <!-- Add -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
@@ -343,6 +348,18 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/adminPlanes.js"></script>
-
+<script src="/js/toastr.js"></script>
+<th:block th:if="${newPlane != null}">
+    <script>toastr.success("New plane successfully created");</script>
+</th:block>
+<th:block th:if="${planeDeleted != null}">
+    <script>toastr.success("Plane successfully deleted");</script>
+</th:block>
+<th:block th:if="${planeUpdated != null}">
+    <script>toastr.success("Plane information successfully updated");</script>
+</th:block>
+<th:block th:if="${planeImagesUpdated != null}">
+    <script>toastr.success("Plane images successfully updated");</script>
+</th:block>
 </body>
 </html>
