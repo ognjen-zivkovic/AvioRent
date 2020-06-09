@@ -5,8 +5,9 @@
     <title>Planes</title>
     <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/toastr.css}">
+    <link rel="stylesheet" th:href="@{http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}">
     <script src="https://use.fontawesome.com/37ac8fd460.js"></script>
 
     <style>
@@ -349,6 +350,8 @@
 <script src="/js/bootstrap.js"></script>
 <script src="/js/adminPlanes.js"></script>
 <script src="/js/toastr.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
 <th:block th:if="${newPlane != null}">
     <script>toastr.success("New plane successfully created");</script>
 </th:block>
@@ -361,5 +364,7 @@
 <th:block th:if="${planeImagesUpdated != null}">
     <script>toastr.success("Plane images successfully updated");</script>
 </th:block>
+
+
 </body>
 </html>
