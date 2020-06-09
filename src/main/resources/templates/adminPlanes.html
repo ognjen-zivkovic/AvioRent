@@ -141,7 +141,14 @@
                                         </td>
 
                                         <td>
-                                            <span class="label label-success">Free</span>
+                                            <th:block th:if="${plane.currentlyRented}">
+                                                <span class="label label-danger">RENTED</span>
+                                            </th:block>
+                                            <th:block th:if="${!plane.currentlyRented}">
+                                                <span class="label label-success">FREE</span>
+                                            </th:block>
+
+
                                         </td>
 
                                         <td>
