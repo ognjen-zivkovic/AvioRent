@@ -21,6 +21,16 @@ public class PlaneWithImagesDto {
 
     List<PlaneImage> images;
 
+    private boolean currentlyRented;
+
+    public boolean isCurrentlyRented() {
+        return currentlyRented;
+    }
+
+    public void setCurrentlyRented(boolean currentlyRented) {
+        this.currentlyRented = currentlyRented;
+    }
+
     public List<PlaneImage> getImages() {
         return images;
     }

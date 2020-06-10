@@ -76,7 +76,7 @@ INSERT INTO plane(
 
 		INSERT INTO rent(
 	rent_id, created_at, date_end, date_start, destination_from, destination_to, is_round_trip, passengers, client_id, plane_id, rent_status_id)
-	VALUES (503, '2020-10-01', '2020-12-01', '2020-11-15', 'BEG', 'FIH', false, 3, 503, 503, 502);
+	VALUES (503, '2020-10-01', '2020-06-16', '2020-06-1', 'BEG', 'FIH', false, 3, 503, 503, 502);
 
 
 INSERT INTO plane_image(

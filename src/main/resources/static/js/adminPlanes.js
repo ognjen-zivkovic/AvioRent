@@ -6,6 +6,20 @@ $(function () {
         getRow(id);
     });
 
+    $(function () {
+        $('#example1').DataTable({
+            responsive: true
+        })
+        $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
+    })
+
 
     $(document).on('click', '#image', function (e) {
 
@@ -43,7 +57,7 @@ $(function () {
                 $(".gallery").remove();
                 $(".editImagesForm").remove();
                 var images = response.images;
-
+                toastr.success("Image successfully removed.");
                 if (images.length > 0) {
                     $('#imageModal').append('<table>');
                     $('#imageModal').append('<tr>');
