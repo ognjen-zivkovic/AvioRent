@@ -46,12 +46,19 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
+    @Cacheable("planes")
     public Page<Plane> getPaginatedPlanes(Pageable pageable) {
-
-
+        //simulateSlowService();
         return this.planeRepository.findAll(pageable);
     }
 
-
+   /* private void simulateSlowService() {
+        try {
+            long time = 5000L;
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
+    }*/
 
 }

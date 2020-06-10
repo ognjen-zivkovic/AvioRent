@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.io.File;
 
 @SpringBootApplication
+@EnableCaching
 public class AviorentApplication {
 
     public static void main(String[] args) {
