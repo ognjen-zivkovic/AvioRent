@@ -77,4 +77,9 @@ public class RentServiceImpl implements RentService {
         rent.ifPresent(r -> rentRepository.save(r));
     }
 
+    @Override
+    public Rent getByPlane(Plane plane) {
+        return this.rentRepository.getByPlane(plane);
+    }
+
 }

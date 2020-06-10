@@ -1,6 +1,7 @@
 package com.aviorent.services;
 
 import com.aviorent.models.Client;
+import com.aviorent.models.Plane;
 import com.aviorent.models.Rent;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface RentService {
     void deleteById(long id);
     Rent update(Rent rent);
     void approveById(long id);
+    Rent getByPlane(Plane plane);
 }

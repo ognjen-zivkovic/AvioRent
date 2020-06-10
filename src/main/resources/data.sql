@@ -1,17 +1,17 @@
 INSERT INTO plane(
-	plane_id, image, max_speed, model, price, range, seats)
-	VALUES (501, 'img.jpg', 2500, 'Sputnik', 50000, 5000, 25);
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (501, 2500, 'Sputnik', 50000, 5000, 25);
 
 
 INSERT INTO plane(
-	plane_id, image, max_speed, model, price, range, seats)
-	VALUES (502, 'img2.jpg', 1000, 'Cesna', 25000, 5500, 2);
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (502, 1000, 'Cesna', 25000, 5500, 2);
 
 
 
 INSERT INTO plane(
-	plane_id, image, max_speed, model, price, range, seats)
-	VALUES (503, 'img3.jpg', 5000, 'F117', 10000, 6230, 3);
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (503,  5000, 'F117', 10000, 6230, 3);
 
 
 	INSERT INTO client(
@@ -76,4 +76,18 @@ INSERT INTO plane(
 
 		INSERT INTO rent(
 	rent_id, created_at, date_end, date_start, destination_from, destination_to, is_round_trip, passengers, client_id, plane_id, rent_status_id)
-	VALUES (503, '2020-10-01', '2020-12-01', '2020-11-15', 'BEG', 'FIH', false, 3, 503, 503, 502);
+	VALUES (503, '2020-10-01', '2020-06-16', '2020-06-1', 'BEG', 'FIH', false, 3, 503, 503, 502);
+
+
+INSERT INTO plane_image(
+	plane_image_id, image_path, plane_id)
+	VALUES (501, '/upload/static/planeImages/prviAvion.jpg', 501);
+	INSERT INTO plane_image(
+	plane_image_id, image_path, plane_id)
+	VALUES (504, '/upload/static/planeImages/drugiAvion.jpg', 501);
+	INSERT INTO plane_image(
+	plane_image_id, image_path, plane_id)
+	VALUES (502, '/upload/static/planeImages/treciAvion.jpg', 502);
+		INSERT INTO plane_image(
+	plane_image_id, image_path, plane_id)
+	VALUES (503, '/upload/static/planeImages/cetvrtiAvion.jpg', 503);
