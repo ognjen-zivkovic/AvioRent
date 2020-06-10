@@ -1,7 +1,7 @@
 package com.aviorent.controllers;
 
 import com.aviorent.models.CrewMember;
-import com.aviorent.models.CrewMemberType;
+import com.aviorent.models.Plane;
 import com.aviorent.services.CrewMemberService;
 import com.aviorent.services.CrewMemberTypeService;
 import com.aviorent.services.PlaneService;
@@ -32,30 +32,24 @@ public class CrewMemberController {
     public String crewMembers(Model model){
         List<CrewMember> members = this.crewMemberService.getAll();
         model.addAttribute("members", members);
-        return "crewmemberlist";
-    }
-
-    @RequestMapping("/crewmemberadd")
-    public String createCrewMember(Model model){
-
         model.addAttribute("crewMember", new CrewMember());
         model.addAttribute("type", crewMemberTypeService.getAll());
         model.addAttribute("plane", planeService.getAll());
-
-
-        return "/crewmemberadd";
+        return "/CrewMember/list";
     }
 
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveCrewMember(@Valid CrewMember crewMember, BindingResult bindingResult, Model model){
+    public String saveCrewMember(@Valid CrewMember crewMember, RedirectAttributes redirectAttrs, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
             model.addAttribute("type", crewMemberTypeService.getAll());
             model.addAttribute("plane", planeService.getAll());
-            return "/crewmemberadd";
+            return "/CrewMember/createForm";
         }
         else{
             CrewMember savedCrewMember = crewMemberService.save(crewMember);
+            redirectAttrs.addFlashAttribute("newCrewMember", true);
             return "redirect:/crewmemberlist";
         }
     }
@@ -63,17 +57,20 @@ public class CrewMemberController {
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttrs) {
         crewMemberService.deleteById(id);
-        redirectAttrs.addFlashAttribute("message", "Crew Member was deleted!");
+        redirectAttrs.addFlashAttribute("crewMemberDeleted", true);
         return "redirect:/crewmemberlist";
     }
 
 
     @RequestMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("crewMember", crewMemberService.getById(id));
-        model.addAttribute("type", crewMemberTypeService.getAll());
-        model.addAttribute("plane", planeService.getAll());
-        return "/crewmemberadd";
+    public String edit(@PathVariable Long id, Model model, RedirectAttributes redirectAttrs) {
+        model.addAttribute("cMember", crewMemberService.getById(id));
+        model.addAttribute("cType", crewMemberTypeService.getAll());
+        model.addAttribute("cPlane", planeService.getAll());
+        redirectAttrs.addFlashAttribute("crewMemberUpdated", true);
+        return "/CrewMember/createForm";
     }
+
+
 
 }

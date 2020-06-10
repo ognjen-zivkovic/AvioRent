@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avio Rent</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
+    <link rel="stylesheet" th:href="@{/../main.css}" href="../../static/main.css">
 </head>
 <body>
     <nav class="nav">
@@ -24,9 +24,9 @@
     </nav>
 
     <div class="form_wrapper">
-        <form th:action="@{/save}" method="POST" class="form" th:object="${crewMember}">
+        <form th:action="@{/save}" method="POST" class="form" th:object="${cMember}">
             <input type="hidden" th:field="*{crewMemberId}" id="crewMemberId"/>
-            <img th:src="@{/img/logo.png}" alt="" class="logo_form">
+            <img th:src="@{/static/img/logo.png}" alt="" class="logo_form">
             <h1>Add Crew Member</h1>
             <label for="firstName">First Name</label>
             <input th:field="*{firstName}" name="firstName" type="text" id="firstName">
@@ -37,12 +37,12 @@
 
             <label>Crew Member Type</label>
             <select th:field="*{crewMemberType}">
-                <option th:each="t : ${type}" th:value="${t.crewMemberTypeId}" th:text="${t.type}"></option>
+                <option th:each="t : ${cType}" th:value="${t.crewMemberTypeId}" th:text="${t.type}"></option>
             </select>
 
             <label>Plane Model</label>
             <select th:field="*{plane}">
-                <option th:each="p : ${plane}" th:value="${p.getPlaneId()}" th:text="${p.getModel()}"></option>
+                <option th:each="p : ${cPlane}" th:value="${p.getPlaneId()}" th:text="${p.getModel()}"></option>
             </select>
 
             <button  class="btn" type="submit">Submit</button>
