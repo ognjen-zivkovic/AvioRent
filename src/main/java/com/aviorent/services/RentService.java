@@ -13,7 +13,6 @@ public interface RentService {
     Optional<Rent> getById(long id);
     void deleteById(long id);
     Rent update(Rent rent);
-    List<Rent> primer(Client client);
+    void approveById(long id);
     Rent getByPlane(Plane plane);
-
 }

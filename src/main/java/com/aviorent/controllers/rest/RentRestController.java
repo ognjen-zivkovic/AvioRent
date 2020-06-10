@@ -66,7 +66,6 @@ public class RentRestController {
         if(existingRent.isPresent())
         {
             Rent newRent = existingRent.get();
-            newRent.setDateStart(rent.getDateStart());
             newRent.setDateEnd(rent.getDateEnd());
             newRent.setCreatedAt(rent.getCreatedAt());
             newRent.setPassengers(rent.getPassengers());
