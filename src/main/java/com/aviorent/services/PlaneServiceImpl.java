@@ -5,6 +5,9 @@ import com.aviorent.models.Plane;
 import com.aviorent.models.PlaneImage;
 import com.aviorent.repositories.PlaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +44,14 @@ public class PlaneServiceImpl implements PlaneService {
         Plane persistedPlane = this.planeRepository.save(plane);
         return persistedPlane;
     }
+
+    @Override
+    public Page<Plane> getPaginatedPlanes(Pageable pageable) {
+
+
+        return this.planeRepository.findAll(pageable);
+    }
+
+
 
 }

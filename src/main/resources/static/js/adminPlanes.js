@@ -6,18 +6,24 @@ $(function () {
         getRow(id);
     });
 
+
+    $(document).ready(function() {
+
+    } );
+
     $(function () {
         $('#example1').DataTable({
-            responsive: true
-        })
-        $('#example2').DataTable({
-            'paging'      : true,
+            responsive: true,
+            'paging'      : false,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false
+            'info'        : false,
+            'autoWidth'   : false,
+            order: [[ 0, 'desc' ]]
+
         })
+
     })
 
 

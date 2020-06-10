@@ -14,6 +14,59 @@ INSERT INTO plane(
 	VALUES (503,  5000, 'F117', 10000, 6230, 3);
 
 
+INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (499, 1000, 'Cesna', 25000, 5500, 2);
+
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (498, 1000, 'Cesna', 25000, 5500, 2);
+
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (497, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (496, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (495, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (494, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (493, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (492, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (491, 1000, 'Cesna', 25000, 5500, 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	INSERT INTO client(
 	client_id, email, password, phone, user_name)
 	VALUES (501, 'boki-ilic@gmail.com', '123456', '063/456-789', 'boki');
