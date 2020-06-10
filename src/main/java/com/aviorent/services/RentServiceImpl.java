@@ -1,11 +1,14 @@
 package com.aviorent.services;
 
 import com.aviorent.models.Client;
+import com.aviorent.models.Plane;
 import com.aviorent.models.Rent;
+import com.aviorent.models.RentStatus;
 import com.aviorent.repositories.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,14 @@ public class RentServiceImpl implements RentService {
     @Autowired
     private RentRepository rentRepository;
 
+    @Autowired
+    private RentStatusService rentStatusService;
+
+    @Autowired
+    private ClientService clientService;
+
+    @Autowired
+    private PlaneService planeService;
 
     @Override
     public List<Rent> getAll() {
@@ -23,6 +34,18 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public Rent create(Rent rent) {
+        // TODO: change client and plane from static to dynamic
+        Optional<RentStatus> rentStatus = rentStatusService.getById(502);
+        rentStatus.ifPresent(rs -> rent.setRentStatus(rs));
+
+        Optional<Client> client = clientService.getById(501);
+        client.ifPresent(c -> rent.setClient(c));
+
+        Optional<Plane> plane = planeService.getById(501);
+        plane.ifPresent(p -> rent.setPlane(p));
+
+        rent.setCreatedAt(new Date());
+
         Rent persistedRent = rentRepository.save(rent);
 
         return persistedRent;
@@ -44,9 +67,14 @@ public class RentServiceImpl implements RentService {
 
         return persistedRent;
     }
-    public List<Rent> primer(Client client)
-    {
-     return this.rentRepository.findByClient(client);
+
+    @Override
+    public void approveById(long id) {
+        Optional<Rent> rent = getById(id);
+        Optional<RentStatus> rentStatus = rentStatusService.getById(503);
+
+        rentStatus.ifPresent(rs -> rent.ifPresent(r -> r.setRentStatus(rs)));
+        rent.ifPresent(r -> rentRepository.save(r));
     }
 
 }
