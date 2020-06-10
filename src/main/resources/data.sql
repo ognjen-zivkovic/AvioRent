@@ -15,23 +15,24 @@ INSERT INTO plane(
 
 
 	INSERT INTO client(
-	client_id, email, password, phone, user_name)
-	VALUES (501, 'boki-ilic@gmail.com', '123456', '063/456-789', 'boki');
+	client_id, email, password, phone, user_name, roles)
+	VALUES (501, 'boki-ilic@gmail.com', '123456', '063/456-789', 'boki', 'user');
 
 
 	INSERT INTO client(
-	client_id, email, password, phone, user_name)
-	VALUES (502, 'boki-ilic32@gmail.com', '56452', '063/123-312', 'boki32');
+	client_id, email, password, phone, user_name, roles)
+	VALUES (502, 'boki-ilic32@gmail.com', '56452', '063/123-312', 'boki32', 'admin');
 
 	INSERT INTO client(
-	client_id, email, password, phone, user_name)
-	VALUES (503, 'ilija_bojanic@yahoo.com', '123', '063/754-312', 'Ica');
+	client_id, email, password, phone, user_name, roles)
+	VALUES (503, 'ilija_bojanic@yahoo.com', '123', '063/754-312', 'Ica', 'user');
+
 
 	INSERT INTO crew_member_type(
 	crew_member_type_id, type)
 	VALUES (501, 'Pilot');
 
-		INSERT INTO crew_member_type(
+	INSERT INTO crew_member_type(
 	crew_member_type_id, type)
 	VALUES (502, 'Co-pilot');
 
@@ -77,3 +78,5 @@ INSERT INTO plane(
 		INSERT INTO rent(
 	rent_id, created_at, date_end, date_start, destination_from, destination_to, is_round_trip, passengers, client_id, plane_id, rent_status_id)
 	VALUES (503, '2020-10-01', '2020-12-01', '2020-11-15', 'BEG', 'FIH', false, 3, 503, 503, 502);
+
+

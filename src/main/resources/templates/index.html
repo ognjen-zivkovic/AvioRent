@@ -5,7 +5,7 @@
     <title>✈ Avio Rent</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{main.css}" href="../static/main.css">
+    <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
         <h1 class="🧠" id="demo"></h1>
     </div>
     <div class="login_wrapper">
-        <form action="" class="form">
+        <form th:action="@{/login}" method="POST" class="form">
             <img th:src="@{/img/logo.png}" alt="" class="logo_form">
             <h1>Fly Airlines</h1>
             <label for="username">Username</label>
@@ -28,7 +28,7 @@
             <label for="pass">Password</label>
             <input id="pass" name="pass" type="password">
             <br>
-            <button class="btn">Sign In</button>
+            <button type="submit" class="btn">Sign In</button>
             <a class="link" href="/signup">Sign Up</a>
         </form>
     </div>

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class ClientController {
         return "client";
     }
 
+
     @RequestMapping(value = "/client", method = RequestMethod.POST)
     public String updateClient(@ModelAttribute Client client) {
         clientService.update(client);
@@ -39,11 +41,19 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-        public ModelAndView login() {
+        public ModelAndView index() {
         ModelAndView model = new ModelAndView();
 
         model.setViewName("/index");
 
+        return model;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+        public ModelAndView login(){
+        ModelAndView model = new ModelAndView();
+
+        model.setViewName("/planes");
         return model;
     }
 
@@ -52,7 +62,7 @@ public class ClientController {
         ModelAndView model = new ModelAndView();
         Client client = new Client();
         model.addObject("client", client);
-        model.setViewName("signup");
+        model.setViewName("/signup");
         return model;
     }
 
@@ -78,6 +88,7 @@ public class ClientController {
             return model;
         }
         else{
+            client.setRoles("user");
             clientService.save(client);
             model.addObject("msg", "User has been registered successfully");
             model.addObject("client", new Client());
