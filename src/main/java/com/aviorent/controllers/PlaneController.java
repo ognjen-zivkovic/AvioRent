@@ -4,8 +4,10 @@ import com.aviorent.dtos.NewPlaneDto;
 import com.aviorent.dtos.PlaneWithImagesDto;
 import com.aviorent.models.Plane;
 import com.aviorent.models.PlaneImage;
+import com.aviorent.models.Rent;
 import com.aviorent.services.PlaneImageService;
 import com.aviorent.services.PlaneService;
+import com.aviorent.services.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,10 +24,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 public class PlaneController {
@@ -36,12 +39,33 @@ public class PlaneController {
     @Autowired
     private PlaneImageService planeImageService;
 
+    @Autowired
+    private RentService rentService;
+
     @GetMapping("/adminPlanes")
     public String adminPlanes(Model model) {
         List<Plane> planes = planeService.getAll();
         List<PlaneWithImagesDto> dto = new ArrayList<PlaneWithImagesDto>();
+        Date currentDate = new Date();
+        Date dateStart = null;
         for (Plane p : planes) {
             PlaneWithImagesDto temp = new PlaneWithImagesDto();
+
+            Rent rent = rentService.getByPlane(p);
+
+            if (rent != null) {
+                dateStart = rent.getDateStart();
+                if (currentDate.before(dateStart)) {
+                    temp.setCurrentlyRented(false);
+                } else if (currentDate.after(dateStart)) {
+                    Date dateEnd = rent.getDateEnd();
+                    if (currentDate.after(dateEnd))
+                        temp.setCurrentlyRented(false);
+                    else
+                        temp.setCurrentlyRented(true);
+                }
+            }
+
             temp.setPlaneId(p.getPlaneId());
             temp.setMaxSpeed(p.getMaxSpeed());
             temp.setModel(p.getModel());
