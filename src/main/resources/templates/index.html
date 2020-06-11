@@ -1,40 +1,27 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>✈ Avio Rent</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
+    <title>Custom Login Page</title>
 </head>
 <body>
-
-    <!-- Background Video Section -->
-    <div class="video_wrapper">
-        <video class="video_intro" autoplay loop controls>
-            <source th:src="@{/video/bg.mp4}" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
-    </div>
-    <div class="black_overlay">
-        <h1 class="🧠" id="demo"></h1>
-    </div>
-    <div class="login_wrapper">
-        <form th:action="@{/login}" method="POST" class="form">
-            <img th:src="@{/img/logo.png}" alt="" class="logo_form">
-            <h1>Fly Airlines</h1>
+<div>
+    <form name="f" th:action="@{/login}" method="post">
+        <fieldset>
+            <legend>Please Login</legend>
+            <div th:if="${param.error}" class="alert alert-error">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+                You have been logged out.
+            </div>
             <label for="username">Username</label>
-            <input id="username" name="username" type="text">
-            <label for="pass">Password</label>
-            <input id="pass" name="pass" type="password">
-            <br>
-            <button type="submit" class="btn">Sign In</button>
-            <a class="link" href="/signup">Sign Up</a>
-        </form>
-    </div>
-
-<script>
-
-</script>
+            <input type="text" id="username" name="username"/>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>
+            <div class="form-actions">
+                <button type="submit" class="btn">Log in</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
 </body>
 </html>

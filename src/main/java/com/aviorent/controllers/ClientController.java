@@ -49,13 +49,7 @@ public class ClientController {
         return model;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-        public ModelAndView login(){
-        ModelAndView model = new ModelAndView();
 
-        model.setViewName("/planes");
-        return model;
-    }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView signup(){
