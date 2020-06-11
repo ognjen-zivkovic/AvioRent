@@ -362,6 +362,8 @@ a:hover {
     border: 2px solid rgba(0, 0, 0, 0);
     -webkit-transition: all ease-Out 0.3s;
     transition: all ease-Out 0.3s;
+
+
     cursor: pointer;
 }
 
@@ -375,6 +377,8 @@ a:hover {
     padding: 0 0 0 1rem;
 }
 
+
+.plane_item:hover {
 .plane_item:hover,
 .plane_selected {
     -webkit-box-shadow: 7px 7px 14px #c5c4c4, -7px -7px 14px #ffffff;

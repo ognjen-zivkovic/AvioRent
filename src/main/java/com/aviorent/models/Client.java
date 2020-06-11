@@ -1,6 +1,8 @@
 package com.aviorent.models;
 
 
+import org.springframework.context.annotation.Configuration;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Set;
@@ -24,7 +26,7 @@ public class Client {
     private String email;
 
     @NotBlank(message = "Password can't be empty.")
-    @Size(min = 8, max = 40)
+    @Size(min = 8, max = 65)
     @Column(name = "password")
     private String password;
 
@@ -32,8 +34,15 @@ public class Client {
     @Column(name = "phone")
     private String phone;
 
+    //@NotBlank(message = "Role is required")
+    @Column(name = "roles")
+    private String roles;
+
+
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy="client")
     private Set<Rent> allRents;
+
 
     public long getClientId() {
         return clientId;
@@ -73,6 +82,14 @@ public class Client {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public String getRoles() {
+        return roles;
     }
 
 

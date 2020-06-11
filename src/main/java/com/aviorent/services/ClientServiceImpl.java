@@ -1,7 +1,6 @@
 package com.aviorent.services;
 
 import com.aviorent.models.Client;
-import com.aviorent.models.Plane;
 import com.aviorent.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,8 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService{
 
         @Autowired
-
         private ClientRepository clientRepository;
+
 
         @Override
         public List<Client> getAll(){
@@ -41,11 +40,13 @@ public class ClientServiceImpl implements ClientService{
         public Client update(Client client) {
             Client persistedClient = this.clientRepository.save(client);
             return persistedClient;
-    }
+        }
 
-    @Override
-    public Client findClientByEmail(String email) {
-        return clientRepository.findByEmail(email);
-    }
+        @Override
+        public Client findClientByEmail(String email) {
+            return clientRepository.findByEmail(email);
+        }
+
+
 
 }
