@@ -41,7 +41,7 @@ public class RentServiceImpl implements RentService {
         Optional<Client> client = clientService.getById(501);
         client.ifPresent(c -> rent.setClient(c));
 
-        Optional<Plane> plane = planeService.getById(501);
+        Optional<Plane> plane = planeService.getById(rent.getPlane().getPlaneId());
         plane.ifPresent(p -> rent.setPlane(p));
 
         rent.setCreatedAt(new Date());
