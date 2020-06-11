@@ -8,6 +8,9 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -17,11 +20,9 @@ public class Rent {
     @Id
     private long rentId;
 
-    @FutureOrPresent(message = "Selected date is not valid")
     @Column(name = "dateStart")
     private Date dateStart;
 
-    @FutureOrPresent(message = "Selected date is not valid")
     @Column(name = "dateEnd")
     private Date dateEnd;
 
@@ -70,8 +71,8 @@ public class Rent {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
-        this.dateStart = dateStart;
+    public void setDateStart(String dateStart) throws ParseException {
+        this.dateStart = new SimpleDateFormat("yyyy-MM-dd").parse(dateStart);
     }
 
     public Date getDateEnd() {

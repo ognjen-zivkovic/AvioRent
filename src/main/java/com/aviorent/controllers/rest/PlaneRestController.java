@@ -62,7 +62,7 @@ public class PlaneRestController {
         {
             Plane newPlane = existingPlane.get();
             newPlane.setModel(plane.getModel());
-            newPlane.setImage(plane.getImage());
+
             newPlane.setMaxSpeed(plane.getMaxSpeed());
             newPlane.setPrice(plane.getPrice());
             newPlane.setRange(plane.getRange());

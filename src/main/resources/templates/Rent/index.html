@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes</title>
+    <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/toastr.css}">
+    <link rel="stylesheet" th:href="@{http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}">
+    <script src="https://use.fontawesome.com/37ac8fd460.js"></script>
+
+</head>
+<header class="main-header">
+
+    <a href="#" class="logo">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="img/logo.png"
+                     class="img-circle" alt="User Image">
+            </div>
+        </div>
+    </a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+    </nav>
+</header>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">MANAGE</li>
+                <li><a href=""><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Rents
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Airplanes</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <a href="#" th:href="@{/rents/create}" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i
+                                    class="fa fa-plus"></i> New</a>
+                        </div>
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Date Start</th>
+                                        <th>Date End</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Passengers</th>
+                                        <th>Round Trip</th>
+                                        <th>Plane</th>
+                                        <th>Client</th>
+                                        <th>Status</th>
+                                        <th>Approve</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="rent : ${rents}">
+                                    <tr>
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.rentId}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.dateStart}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.dateEnd}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.destinationFrom}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.destinationTo}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.passengers}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.roundTrip}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.plane.model}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.client.email}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${rent.rentStatus.status}"></span>
+                                        </td>
+
+                                        <td th:switch="${rent.rentStatus.rentStatusId}">
+                                            <a th:case="502" href="#" th:href="@{/rents/approve/} + ${rent.rentId}">
+                                                <button class='btn btn-success btn-sm btn-flat'>
+                                                    Approve
+                                                </button>
+                                            </a>
+                                            <div th:case="*">-</div>
+                                        </td>
+
+                                        <td>
+                                            <a href="#" th:href="@{/rents/delete/} + ${rent.rentId}">
+                                                <button class='btn btn-danger btn-sm btn-flat'>Delete</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+
+                            <!-- Pagination Start -->
+                            <div class="row" th:fragment="pagination">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8 pagination">
+                                    <nav aria-label="Pagination">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
+                                                <a class="page-link" th:href="@{|/admin/rents/page/${pageNumber}|}" th:text="${pageNumber}">1</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <!-- Pagination End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Delete -->
+<div class="modal fade" id="delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Deleting...</b></h4>
+            </div>
+            <form class="form-horizontal" method="POST" action="/rents/delete">
+                <div class="modal-body">
+                    <input type="hidden" class="rentId" name="rentId">
+                    <div class="text-center">
+                        <p>DELETE RENT</p>
+                        <h2 class="bold planeModel"></h2>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i
+                            class="fa fa-close"></i> Close
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete End -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/adminPlanes.js"></script>
+<script src="/js/toastr.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
+<th:block th:if="${rentDeleted != null}">
+    <script>toastr.success("Plane successfully deleted");</script>
+</th:block>
+</body>
+</html>

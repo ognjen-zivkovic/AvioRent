@@ -22,10 +22,6 @@ public class Plane {
     @Column (name = "seats")
     private int seats;
 
-    @NotBlank(message = "Image is required")
-    @Column  (name = "image")
-    private String image;
-
     @NotNull(message = "Max speed is required")
     @Positive(message = "Max speed value must be positive")
     @Column  (name = "maxSpeed")
@@ -46,6 +42,17 @@ public class Plane {
 
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
     private Set<Rent> allRents;
+
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "plane")
+    private Set<PlaneImage> images;
+
+    public Set<PlaneImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<PlaneImage> images) {
+        this.images = images;
+    }
 
     public long getPlaneId() {
         return planeId;
@@ -69,14 +76,6 @@ public class Plane {
 
     public void setSeats(int seats) {
         this.seats = seats;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public int getMaxSpeed() {

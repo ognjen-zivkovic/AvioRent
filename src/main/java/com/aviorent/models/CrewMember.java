@@ -23,11 +23,28 @@ public class CrewMember {
     private String lastName;
 
     @ManyToOne
-    @JoinColumn( name = "planeId")
+    @JoinColumn( name = "planeId", nullable = false)
     private Plane plane;
 
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
+
+    public CrewMemberType getCrewMemberType() {
+        return crewMemberType;
+    }
+
+    public void setCrewMemberType(CrewMemberType crewMemberType) {
+        this.crewMemberType = crewMemberType;
+    }
+
     @ManyToOne
-    @JoinColumn( name = "crewMemberTypeId")
+    @JoinColumn( name = "crewMemberTypeId", nullable = false)
     private CrewMemberType crewMemberType;
 
     public long getCrewMemberId() {
