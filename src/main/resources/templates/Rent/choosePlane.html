@@ -33,7 +33,7 @@
     <h1>Select plane</h1>
 </div>
 
-<div th:each="plane : ${planes}" class="plane_container" id="plane_section">
+<div class="plane_container" id="plane_section">
     <div th:each="plane : ${planes}">
         <div class="plane_item">
             <span style="display: none" th:text="${plane.planeId}" class="id"></span>
