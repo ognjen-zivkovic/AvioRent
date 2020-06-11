@@ -375,7 +375,8 @@ a:hover {
     padding: 0 0 0 1rem;
 }
 
-.plane_item:hover {
+.plane_item:hover,
+.plane_selected {
     -webkit-box-shadow: 7px 7px 14px #c5c4c4, -7px -7px 14px #ffffff;
     box-shadow: 7px 7px 14px #c5c4c4, -7px -7px 14px #ffffff;
     border: 2px solid #706fd3;
