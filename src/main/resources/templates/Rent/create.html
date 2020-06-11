@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Rent</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{../main.css}" href="../static/main.css">
+    <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
 </head>
 <body>
     <nav class="nav">
@@ -24,30 +24,30 @@
     </nav>
 
     <div class="form_wrapper">
-        <form th:action="@{/create}" method="POST" class="form" th:object="${rent}">
+        <form th:action="@{/rents/next}" method="POST" class="form" th:object="${rent}">
             <img th:src="@{/img/logo.png}" alt="" class="logo_form">
             <h1>Create Rent</h1>
 
             <label for="passengers">Passengers</label>
-            <input th:field="*{passengers}" name="passengers" id="passengers" type="text">
+            <input th:field="*{passengers}" name="passengers" id="passengers" type="text" required>
             <span th:if="${#fields.hasErrors('passengers')}" th:errors="*{passengers}" th:class="help-block">Passengers Errors</span>
 
             <label for="destinationFrom">From</label>
-            <input th:field="*{destinationFrom}" name="destinationFrom" id="destinationFrom" type="text">
+            <input th:field="*{destinationFrom}" name="destinationFrom" id="destinationFrom" type="text" required>
             <span th:if="${#fields.hasErrors('destinationFrom')}" th:errors="*{destinationFrom}" th:class="help-block">From Destination Errors</span>
 
             <label for="destinationTo">To</label>
-            <input th:field="*{destinationTo}" name="destinationTo" id="destinationTo" type="text">
+            <input th:field="*{destinationTo}" name="destinationTo" id="destinationTo" type="text" required>
             <span th:if="${#fields.hasErrors('destinationTo')}" th:errors="*{destinationTo}" th:class="help-block">To Destination Errors</span>
 
             <label for="dateStart">Start Date</label>
-            <input th:field="*{dateStart}" name="dateStart" id="dateStart" type="date">
+            <input th:field="*{dateStart}" name="dateStart" id="dateStart" type="date" required>
             <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:class="help-block">Start Date Errors</span>
 
             <label>Round Trip</label>
             <input th:value="*{roundTrip}" th:field="*{roundTrip}" name="isRoundTrip" id="isRoundTrip" type="checkbox">
 
-            <button  class="btn" type="submit">Submit</button>
+            <button  class="btn" type="submit">Next</button>
 
         </form>
     </div>

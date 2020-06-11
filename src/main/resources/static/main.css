@@ -362,6 +362,7 @@ a:hover {
     border: 2px solid rgba(0, 0, 0, 0);
     -webkit-transition: all ease-Out 0.3s;
     transition: all ease-Out 0.3s;
+    cursor: pointer;
 }
 
 .plane_item h3 {
