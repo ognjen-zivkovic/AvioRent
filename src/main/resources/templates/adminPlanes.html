@@ -53,7 +53,7 @@
     <a href="#" class="logo">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="img/logo.png"
+                <img src="../../img/logo.png"
                      class="img-circle" alt="User Image">
             </div>
         </div>
@@ -65,8 +65,9 @@
     </nav>
 </header>
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
-    <aside class="main-sidebar">
+       <aside class="main-sidebar">
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MANAGE</li>
@@ -93,9 +94,9 @@
                                     class="fa fa-plus"></i> New</a>
                         </div>
                         <div class="box-body">
-                            <table id="example1" class="table table-bordered">
+                            <table id="example1" class="table table-bordered" >
                                 <thead>
-                                <th>Images</th>
+                                <th data-sort-order="desc" >Images</th>
                                 <th>Model</th>
                                 <th>Seats</th>
                                 <th>Max speed</th>
@@ -163,7 +164,24 @@
                                     </tr>
                                 </th:block>
                                 </tbody>
+
                             </table>
+                            <!--Pagination backend -->
+
+                            <div class="row" th:fragment="pagination">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8 pagination">
+                                    <nav aria-label="Pagination">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
+                                                <a class="page-link" th:href="@{|/adminPlanes/page/${pageNumber}|}" th:text=${pageNumber}>1</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <!--Pagination backend End-->
                         </div>
                     </div>
                 </div>
@@ -171,7 +189,6 @@
         </section>
     </div>
 </div>
-
 
 
 

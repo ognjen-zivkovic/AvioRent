@@ -9,6 +9,9 @@ import com.aviorent.services.PlaneImageService;
 import com.aviorent.services.PlaneService;
 import com.aviorent.services.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.Converter;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +33,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class PlaneController {
@@ -42,9 +49,56 @@ public class PlaneController {
     @Autowired
     private RentService rentService;
 
+
+    @GetMapping(value = "/adminPlanes/page/{page}")
+    public ModelAndView adminPlanes(@PathVariable("page") int page) {
+        ModelAndView modelAndView = new ModelAndView("adminPlanes");
+        PageRequest pageable = PageRequest.of(page - 1, 5, Sort.by("planeId").descending());
+        Page<Plane> planePage = planeService.getPaginatedPlanes(pageable);
+        int totalPages = planePage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
+        Page<PlaneWithImagesDto> dtoPage = planePage.map(new Function<Plane, PlaneWithImagesDto>() {
+            @Override
+            public PlaneWithImagesDto apply(Plane plane) {
+                PlaneWithImagesDto dto = new PlaneWithImagesDto();
+                dto.setPlaneId(plane.getPlaneId());
+                List<PlaneImage> planeImages = new ArrayList<>(plane.getImages());
+                dto.setImages(planeImages);
+                dto.setMaxSpeed(plane.getMaxSpeed());
+                dto.setModel(plane.getModel());
+                dto.setPrice(plane.getPrice());
+                dto.setRange(plane.getRange());
+                dto.setSeats(plane.getSeats());
+                Rent rent = rentService.getByPlane(plane);
+                Date currentDate = new Date();
+                Date dateStart = null;
+                if (rent != null) {
+                    dateStart = rent.getDateStart();
+                    if (currentDate.before(dateStart)) {
+                        dto.setCurrentlyRented(false);
+                    } else if (currentDate.after(dateStart)) {
+                        Date dateEnd = rent.getDateEnd();
+                        if (currentDate.after(dateEnd))
+                            dto.setCurrentlyRented(false);
+                        else
+                            dto.setCurrentlyRented(true);
+                    }
+                }
+                return dto;
+            }
+        });
+        modelAndView.addObject("activePlaneList", true);
+        modelAndView.addObject("planes", dtoPage.getContent());
+        return modelAndView;
+    }
+
     @GetMapping("/adminPlanes")
     public String adminPlanes(Model model) {
-        List<Plane> planes = planeService.getAll();
+        return "redirect:/adminPlanes/page/1";
+        /*List<Plane> planes = planeService.getAll();
         List<PlaneWithImagesDto> dto = new ArrayList<PlaneWithImagesDto>();
         Date currentDate = new Date();
         Date dateStart = null;
@@ -77,7 +131,7 @@ public class PlaneController {
         }
 
         model.addAttribute("planes", dto);
-        return "adminPlanes";
+        return "adminPlanes";*/
     }
 
 
@@ -113,7 +167,7 @@ public class PlaneController {
 
         redirectAttributes.addFlashAttribute("newPlane", true);
 
-        return new ModelAndView("redirect:/adminPlanes");
+        return new ModelAndView("redirect:/adminPlanes/page/1");
     }
 
     @PostMapping("/getRow")
@@ -126,14 +180,14 @@ public class PlaneController {
     public ModelAndView deletePlane(@RequestParam long planeId, RedirectAttributes redirectAttributes) {
         planeService.deleteById(planeId);
         redirectAttributes.addFlashAttribute("planeDeleted", true);
-        return new ModelAndView("redirect:/adminPlanes");
+        return new ModelAndView("redirect:/adminPlanes/page/1");
     }
 
     @PostMapping("/editPlane")
     public ModelAndView editPlane(@ModelAttribute Plane plane, RedirectAttributes redirectAttributes) {
         planeService.update(plane);
         redirectAttributes.addFlashAttribute("planeUpdated", true);
-        return new ModelAndView("redirect:/adminPlanes");
+        return new ModelAndView("redirect:/adminPlanes/page/1");
     }
 
     @Transactional
@@ -169,7 +223,7 @@ public class PlaneController {
             }
         }
 
-        return new ModelAndView("redirect:/adminPlanes");
+        return new ModelAndView("redirect:/adminPlanes/page/1");
     }
 
 }

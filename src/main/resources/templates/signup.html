@@ -14,15 +14,20 @@
             <img th:src="@{/img/logo.png}" alt="" class="logo_form">
             <h1>Fly Airlines</h1>
             <label for="username">Username</label>
-            <input th:field="*{client.userName}" name="username" type="text">
+            <input th:field="*{client.userName}" id="username" name="username" type="text">
+            <span style="color: red;" th:if="${#fields.hasErrors('client.userName')}" th:errors="*{client.userName}" th:class="help-block">Username error</span>
             <label for="email">Email</label>
-            <input th:field="*{client.email}" name="email" type="text">
+            <input style="color: red;" th:field="*{client.email}" id="email" name="email" type="text">
+            <span style="color: red;" th:if="${#fields.hasErrors('client.email')}" th:errors="*{client.email}" th:class="help-block">Email error</span>
+            <span style="color: red;" th:text="${Userexists != null ? 'User already exists' : ''}"></span>
             <label for="pass">Password</label>
-            <input th:field="*{client.password}" name="pass" type="password">
+            <input th:field="*{client.password}" id="pass" name="pass" type="password">
+            <span style="color: red;" th:if="${#fields.hasErrors('client.password')}" th:errors="*{client.password}" th:class="help-block">Password error</span>
             <!--<label for="passretype">Retype Password</label>
             <input th:field="*{password}" name="passretype" type="password">-->
             <label for="phone">Phone</label>
-            <input th:field="*{client.phone}" name="phone" type="text">
+            <input th:field="*{client.phone}" id="phone" name="phone" type="text">
+            <span style="color: red;" th:if="${#fields.hasErrors('client.phone')}" th:errors="*{client.phone}" th:class="help-block">Phone error</span>
             <br>
             <button class="btn" type="submit">Sign Up</button>
             <a class="link" href="">Cancel</a>

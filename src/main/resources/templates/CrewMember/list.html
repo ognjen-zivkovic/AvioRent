@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avio Rent</title>
+    <title>Crew Members</title>
     <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.min.css}">
@@ -17,7 +17,7 @@
     <a href="#" class="logo">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="img/logo.png"
+                <img src="../../img/logo.png"
                      class="img-circle" alt="User Image">
             </div>
         </div>
@@ -91,6 +91,21 @@
                                     </th:block>
                                     </tbody>
                                 </table>
+                                <!-- Pagination Start -->
+                                <div class="row" th:fragment="pagination">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8 pagination">
+                                        <nav aria-label="Pagination">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
+                                                    <a class="page-link" th:href="@{|/crewmemberlist/page/${pageNumber}|}" th:text="${pageNumber}">1</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <!-- Pagination End -->
                             </div>
                         </div>
                     </div>
@@ -156,6 +171,8 @@
     </div>
     </div>
     <!-- Add End -->
+
+
 
 
     <script src="/js/jquery.min.js"></script>

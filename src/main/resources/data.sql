@@ -14,24 +14,78 @@ INSERT INTO plane(
 	VALUES (503,  5000, 'F117', 10000, 6230, 3);
 
 
-	INSERT INTO client(
-	client_id, email, password, phone, user_name)
-	VALUES (501, 'boki-ilic@gmail.com', '123456', '063/456-789', 'boki');
+INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (499, 1000, 'Cesna', 25000, 5500, 2);
+
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (498, 1000, 'Cesna', 25000, 5500, 2);
+
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (497, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (496, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (495, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (494, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (493, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (492, 1000, 'Cesna', 25000, 5500, 2);
+	INSERT INTO plane(
+	plane_id,  max_speed, model, price, range, seats)
+	VALUES (491, 1000, 'Cesna', 25000, 5500, 2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	INSERT INTO client(
-	client_id, email, password, phone, user_name)
-	VALUES (502, 'boki-ilic32@gmail.com', '56452', '063/123-312', 'boki32');
+	client_id, email, password, phone, user_name, roles)
+	VALUES (501, 'boki-ilic@gmail.com', '123456', '063/456-789', 'boki', 'user');
+
 
 	INSERT INTO client(
-	client_id, email, password, phone, user_name)
-	VALUES (503, 'ilija_bojanic@yahoo.com', '123', '063/754-312', 'Ica');
+	client_id, email, password, phone, user_name, roles)
+	VALUES (502, 'boki-ilic32@gmail.com', '56452', '063/123-312', 'boki32', 'admin');
+
+	INSERT INTO client(
+	client_id, email, password, phone, user_name, roles)
+	VALUES (503, 'ilija_bojanic@yahoo.com', '123', '063/754-312', 'Ica', 'user');
+
 
 	INSERT INTO crew_member_type(
 	crew_member_type_id, type)
 	VALUES (501, 'Pilot');
 
-		INSERT INTO crew_member_type(
+	INSERT INTO crew_member_type(
 	crew_member_type_id, type)
 	VALUES (502, 'Co-pilot');
 
@@ -76,6 +130,11 @@ INSERT INTO plane(
 
 		INSERT INTO rent(
 	rent_id, created_at, date_end, date_start, destination_from, destination_to, is_round_trip, passengers, client_id, plane_id, rent_status_id)
+
+	VALUES (503, '2020-10-01', '2020-12-01', '2020-11-15', 'BEG', 'FIH', false, 3, 503, 503, 502);
+
+
+
 	VALUES (503, '2020-10-01', '2020-06-16', '2020-06-1', 'BEG', 'FIH', false, 3, 503, 503, 502);
 
 
@@ -91,3 +150,4 @@ INSERT INTO plane_image(
 		INSERT INTO plane_image(
 	plane_image_id, image_path, plane_id)
 	VALUES (503, '/upload/static/planeImages/cetvrtiAvion.jpg', 503);
+
