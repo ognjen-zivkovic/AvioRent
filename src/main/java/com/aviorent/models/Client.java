@@ -26,7 +26,7 @@ public class Client {
     private String email;
 
     @NotBlank(message = "Password can't be empty.")
-    @Size(min = 8, max = 40)
+    @Size(min = 8, max = 65)
     @Column(name = "password")
     private String password;
 

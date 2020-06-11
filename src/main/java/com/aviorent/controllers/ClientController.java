@@ -3,6 +3,10 @@ package com.aviorent.controllers;
 import com.aviorent.models.Client;
 import com.aviorent.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,6 +64,11 @@ public class ClientController {
         return model;
     }
 
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView createUser(@Valid Client client, BindingResult bindingResult){
         ModelAndView model = new ModelAndView();
@@ -83,6 +92,7 @@ public class ClientController {
         }
         else{
             client.setRoles("user");
+            client.setPassword(passwordEncoder.encode(client.getPassword()));
             clientService.save(client);
             model.addObject("msg", "User has been registered successfully");
             model.addObject("client", new Client());
