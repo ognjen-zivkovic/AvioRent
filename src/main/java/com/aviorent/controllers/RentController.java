@@ -10,6 +10,9 @@ import com.aviorent.services.PlaneImageService;
 import com.aviorent.services.PlaneService;
 import com.aviorent.services.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +26,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class RentController {
@@ -35,13 +41,29 @@ public class RentController {
     @Autowired
     private PlaneImageService planeImageService;
 
+    @GetMapping("/admin/rents/page/{page}")
+    public ModelAndView RentList(@PathVariable("page") int page)
+    {
+        ModelAndView modelAndView = new ModelAndView("Rent/index");
+        PageRequest pageable = PageRequest.of(page - 1, 5, Sort.by("dateStart").descending());
+        Page<Rent> rentPage = rentService.getPaginatedRents(pageable);
+        int totalPages = rentPage.getTotalPages();
+
+        if(totalPages > 0 ) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
+
+        modelAndView.addObject("activeRentList", true);
+        modelAndView.addObject("rents", rentPage.getContent());
+
+        return modelAndView;
+    }
+
     @GetMapping("/admin/rents")
     public String RentList(Model model)
     {
-        List<Rent> rents = this.rentService.getAll();
-        model.addAttribute("rents", rents);
-
-        return "Rent/index";
+        return "redirect:/admin/rents/page/1";
     }
 
     @GetMapping("rents/create")
@@ -105,7 +127,7 @@ public class RentController {
 
             Rent savedRent = rentService.create(rent);
 
-            return new ModelAndView("redirect:/rents/create");
+            return new ModelAndView("redirect:/index");
         }
     }
 

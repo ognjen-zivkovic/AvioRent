@@ -2,12 +2,15 @@
 <html lang="en" xmlns:th='http://www.thymeleaf.org'>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planes</title>
     <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/toastr.css}">
+    <link rel="stylesheet" th:href="@{http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}">
     <script src="https://use.fontawesome.com/37ac8fd460.js"></script>
+
 </head>
 <header class="main-header">
 
@@ -132,6 +135,22 @@
                                 </th:block>
                                 </tbody>
                             </table>
+
+                            <!-- Pagination Start -->
+                            <div class="row" th:fragment="pagination">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8 pagination">
+                                    <nav aria-label="Pagination">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
+                                                <a class="page-link" th:href="@{|/admin/rents/page/${pageNumber}|}" th:text="${pageNumber}">1</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <!-- Pagination End -->
                         </div>
                     </div>
                 </div>
@@ -170,11 +189,12 @@
 </div>
 
 <!-- Delete End -->
-
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/adminPlanes.js"></script>
 <script src="/js/toastr.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
 <th:block th:if="${rentDeleted != null}">
     <script>toastr.success("Plane successfully deleted");</script>
 </th:block>

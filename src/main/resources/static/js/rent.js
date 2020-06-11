@@ -1,10 +1,13 @@
-document.querySelectorAll('.plane_item').forEach(item => {
-    item.addEventListener('click', event => {
+const planes = document.querySelectorAll('.plane_item')
 
+planes.forEach(item => {
+    item.addEventListener('click', event => {
          const planeId = item.querySelector('.id').innerText;
-         console.log(planeId);
 
         document.getElementById("planeId").value = planeId;
-        console.log(document.getElementById("planeId"))
+
+        let planeClass = "plane_selected";
+        planes.forEach(plane => plane.classList.remove(planeClass))
+        item.classList.add("plane_selected");
     })
 })
