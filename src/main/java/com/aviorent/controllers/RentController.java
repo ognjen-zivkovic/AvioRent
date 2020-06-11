@@ -41,29 +41,32 @@ public class RentController {
     @Autowired
     private PlaneImageService planeImageService;
 
-    @GetMapping("/admin/rents/page/{page}")
-    public ModelAndView RentList(@PathVariable("page") int page)
-    {
-        ModelAndView modelAndView = new ModelAndView("Rent/index");
-        PageRequest pageable = PageRequest.of(page - 1, 5, Sort.by("dateStart").descending());
-        Page<Rent> rentPage = rentService.getPaginatedRents(pageable);
-        int totalPages = rentPage.getTotalPages();
-
-        if(totalPages > 0 ) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-            modelAndView.addObject("pageNumbers", pageNumbers);
-        }
-
-        modelAndView.addObject("activeRentList", true);
-        modelAndView.addObject("rents", rentPage.getContent());
-
-        return modelAndView;
-    }
+//    @GetMapping("/admin/rents/page/{page}")
+//    public ModelAndView RentList(@PathVariable("page") int page)
+//    {
+//        ModelAndView modelAndView = new ModelAndView("Rent/index");
+//        PageRequest pageable = PageRequest.of(page - 1, 5, Sort.by("dateStart").descending());
+//        Page<Rent> rentPage = rentService.getPaginatedRents(pageable);
+//        int totalPages = rentPage.getTotalPages();
+//
+//        if(totalPages > 0 ) {
+//            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+//            modelAndView.addObject("pageNumbers", pageNumbers);
+//        }
+//
+//        modelAndView.addObject("activeRentList", true);
+//        modelAndView.addObject("rents", rentPage.getContent());
+//
+//        return modelAndView;
+//    }
 
     @GetMapping("/admin/rents")
     public String RentList(Model model)
     {
-        return "redirect:/admin/rents/page/1";
+        List<Rent> rents = this.rentService.getAll();
+        model.addAttribute("rents", rents);
+
+        return "Rent/index";
     }
 
     @GetMapping("rents/create")
@@ -90,7 +93,7 @@ public class RentController {
     public String ChoosePlane(Model model) {
         RentDto rentDto = (RentDto) model.asMap().get("rent");
         List<Plane> planes = this.planeService.getAll();
-        List<PlaneWithImagesDto> dto = new ArrayList<PlaneWithImagesDto>();
+        List<PlaneWithImagesDto> dto = new ArrayList<>();
 
         for (Plane p : planes) {
             PlaneWithImagesDto temp = new PlaneWithImagesDto();
