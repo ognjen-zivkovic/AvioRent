@@ -6,6 +6,7 @@ import com.aviorent.models.Rent;
 import com.aviorent.models.RentStatus;
 import com.aviorent.repositories.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -85,8 +86,19 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
+    @Cacheable("rents")
     public Page<Rent> getPaginatedRents(Pageable pageable) {
+//        simulateSlowService();
         return this.rentRepository.findAll(pageable);
     }
+
+//    private void simulateSlowService() {
+//        try {
+//            long time = 5000L;
+//            Thread.sleep(time);
+//        } catch (InterruptedException e) {
+//            throw new IllegalStateException(e);
+//        }
+//    }
 
 }
