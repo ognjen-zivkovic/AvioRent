@@ -91,7 +91,7 @@ public class ClientController {
             return model;
         }
         else{
-            client.setRoles("user");
+            client.setRoles("ROLE_USER");
             client.setPassword(passwordEncoder.encode(client.getPassword()));
             clientService.save(client);
             model.addObject("msg", "User has been registered successfully");

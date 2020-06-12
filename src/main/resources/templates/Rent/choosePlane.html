@@ -37,7 +37,11 @@
     <div th:each="plane : ${planes}">
         <div class="plane_item">
             <span style="display: none" th:text="${plane.planeId}" class="id"></span>
-            <img th:src="@{${plane.getImages().get(0).imagePath}}" alt="">
+
+            <th:block th:if="${plane.getImages().size() != 0}">
+                <img th:src="@{${plane.getImages().get(0).imagePath}}" alt="">
+            </th:block>
+
             <h3 th:text="${plane.model}" id="model"></h3>
             <p><strong>Max Speed</strong> <span th:text="${plane.maxSpeed}"></span>km/h</p>
             <p><strong>Max Range</strong> <span th:text="${plane.range}"></span>km</p>
