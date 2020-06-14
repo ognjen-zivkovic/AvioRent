@@ -664,7 +664,7 @@ a:hover {
 }
 
 .home-container {
-    max-width: 960px;
+    max-width: 1160px;
     width: 100%;
     margin: 0 auto;
     display: -webkit-box;
@@ -678,6 +678,10 @@ a:hover {
     -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
     background: white;
+}
+
+.home-container p {
+    text-align: center;
 }
 
 .home_item {
@@ -730,4 +734,11 @@ a:hover {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
 }
+
+.signup_wrapper {
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+
 /*# sourceMappingURL=main.css.map */
