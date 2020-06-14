@@ -8,7 +8,7 @@
     <title>Home page</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
-
+    <link rel="stylesheet" th:href="@{/css/toastr.css}">
 
 </head>
 <body style="background-color: white; overflow-x: hidden;">
@@ -163,5 +163,11 @@
             </p>
         </div>
     </footer>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/toastr.js"></script>
+    <th:block th:if="${isAdmin != null}">
+        <script>toastr.info("You can't create reservation as ADMIN");</script>
+    </th:block>
 </body>
 </html>

@@ -45,6 +45,10 @@ public class MyClientDetails implements UserDetails {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

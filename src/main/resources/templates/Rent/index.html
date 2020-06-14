@@ -194,7 +194,10 @@
 <script src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/dataTables.bootstrap.min.js"></script>
 <th:block th:if="${rentDeleted != null}">
-    <script>toastr.success("Plane successfully deleted");</script>
+    <script>toastr.success("Rent successfully deleted");</script>
+</th:block>
+<th:block th:if="${rentApproved != null}">
+    <script>toastr.success("Rent successfully approved");</script>
 </th:block>
 </body>
 </html>

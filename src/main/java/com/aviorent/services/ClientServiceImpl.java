@@ -43,6 +43,7 @@ public class ClientServiceImpl implements ClientService{
 
         @Override
         public Client update(Client client) {
+
             Client persistedClient = this.clientRepository.save(client);
             return persistedClient;
         }

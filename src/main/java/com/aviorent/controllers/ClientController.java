@@ -1,9 +1,12 @@
 package com.aviorent.controllers;
 
+import com.aviorent.config.MyClientDetails;
 import com.aviorent.models.Client;
 import com.aviorent.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -32,24 +36,33 @@ public class ClientController {
     }
 
     @GetMapping("/client")
-    public String client(Model model) {
-        Client client = this.clientService.getById(503).get();
+    public String client(Model model, Principal principal) {
+        String username = principal.getName();
+
+        Client client = this.clientService.getByUsername(username).get();
+
         model.addAttribute("client", client);
         return "client";
     }
 
     @PostMapping(value = "/client")
-    public ModelAndView updateClient(@ModelAttribute Client client) {
+    public ModelAndView updateClient(@ModelAttribute Client client, RedirectAttributes redirectAttributes) {
         ModelAndView model = new ModelAndView();
         clientService.update(client);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyClientDetails clientDetails = (MyClientDetails) authentication.getPrincipal();
+        clientDetails.setUserName(client.getUserName());
+
         model = new ModelAndView();
         model.addObject("msg", "User has been registered successfully");
-        model.setViewName("/client");
+        redirectAttributes.addFlashAttribute("ClientUpdated", true);
+        model.setViewName("redirect:/allrents");
         return model;
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-        public ModelAndView index() {
+    public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         model.setViewName("/home");
         return model;

@@ -6,14 +6,14 @@ import com.aviorent.models.Client;
 import com.aviorent.models.CrewMember;
 import com.aviorent.models.Plane;
 import com.aviorent.models.Rent;
-import com.aviorent.services.CrewMemberTypeService;
-import com.aviorent.services.PlaneImageService;
-import com.aviorent.services.PlaneService;
-import com.aviorent.services.RentService;
+import com.aviorent.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,9 +25,7 @@ import org.thymeleaf.standard.expression.GreaterOrEqualToExpression;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -40,8 +38,12 @@ public class RentController {
 
     @Autowired
     private PlaneService planeService;
+
     @Autowired
     private PlaneImageService planeImageService;
+
+    @Autowired
+    private ClientService clientService;
 
 //    @GetMapping("/admin/rents/page/{page}")
 //    public ModelAndView RentList(@PathVariable("page") int page)
@@ -103,6 +105,13 @@ public class RentController {
                 return new ModelAndView("redirect:/login");
             }
 
+            Optional<Client> client = clientService.getByUsername(principal.getName());
+            if(client.get().getRoles().contains("ROLE_ADMIN"))
+            {
+                redirectAttributes.addFlashAttribute("isAdmin", true);
+                return new ModelAndView("redirect:/home");
+            }
+
             redirectAttributes.addFlashAttribute("rent", rent);
 
             return new ModelAndView("redirect:/rents/choosePlane");
@@ -135,7 +144,7 @@ public class RentController {
     }
 
     @RequestMapping(value = "/rents/submit", method = RequestMethod.POST)
-    public ModelAndView CreateRent(@Valid RentDto rentDto, BindingResult bindingResult, Model model, Principal principal) throws ParseException {
+    public ModelAndView CreateRent(@Valid RentDto rentDto, BindingResult bindingResult, Model model, Principal principal, RedirectAttributes redirectAttributes) throws ParseException {
         if(bindingResult.hasErrors()){
             return new ModelAndView("Rent/choosePlane");
         }
@@ -154,6 +163,8 @@ public class RentController {
 
             Rent savedRent = rentService.create(rent);
 
+            redirectAttributes.addFlashAttribute("RentCreated", true);
+
             return new ModelAndView("redirect:/allrents");
         }
     }
@@ -163,7 +174,7 @@ public class RentController {
     public String Delete(@PathVariable Long id, RedirectAttributes redirectAttrs) {
         rentService.deleteById(id);
 
-        redirectAttrs.addFlashAttribute("message", "Rent was deleted!");
+        redirectAttrs.addFlashAttribute("rentDeleted", true);
 
         return "redirect:/admin/rents";
     }
@@ -171,7 +182,7 @@ public class RentController {
     @RequestMapping("/rents/approve/{id}")
     public String Approve(@PathVariable Long id, RedirectAttributes redirectAttrs) {
         rentService.approveById(id);
-        redirectAttrs.addFlashAttribute("message", "Rent was approved!");
+        redirectAttrs.addFlashAttribute("rentApproved", true);
 
         return "redirect:/admin/rents";
     }

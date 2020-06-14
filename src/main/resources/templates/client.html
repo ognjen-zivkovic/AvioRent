@@ -36,11 +36,12 @@
             <label for="email">Email</label>
             <input th:field="*{client.email}" name="email" type="text">
 
-            <label for="password">Password</label>
-            <input th:field="*{client.password}" name="password" type="password">
-
             <label for="phone">Phone</label>
             <input th:field="*{client.phone}" name="phone" type="text">
+
+            <input th:field="*{client.roles}" name="roles" type="hidden">
+            <input th:field="*{client.password}" name="password" type="hidden">
+
             <br>
             <button class="btn" type="submit">Update profile</button>
             <a class="link" href="/home">Cancel</a>
