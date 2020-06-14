@@ -34,9 +34,9 @@
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MANAGE</li>
-                <li><a href=""><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
-                <li><a href=""><i class="fa fa-plane"></i> <span>Crew members</span></a></li>
-                <li><a href="/admin/rents"><i class="fa fa-plane"></i> <span>Rents</span></a></li>
+                <li><a href="/adminPlanes"><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
+                <li><a href="/crewmemberlist"><i class="fa fa-users"></i> <span>Crew members</span></a></li>
+                <li><a href="/admin/rents"><i class="fa fa-paper-plane"></i> <span>Rents</span></a></li>
             </ul>
         </section>
     </aside>
@@ -139,19 +139,19 @@
                             </table>
 
                             <!-- Pagination Start -->
-                            <div class="row" th:fragment="pagination">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8 pagination">
-                                    <nav aria-label="Pagination">
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
-                                                <a class="page-link" th:href="@{|/admin/rents/page/${pageNumber}|}" th:text="${pageNumber}">1</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <div class="col-md-2"></div>
-                            </div>
+<!--                            <div class="row" th:fragment="pagination">-->
+<!--                                <div class="col-md-2"></div>-->
+<!--                                <div class="col-md-8 pagination">-->
+<!--                                    <nav aria-label="Pagination">-->
+<!--                                        <ul class="pagination justify-content-center">-->
+<!--                                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >-->
+<!--                                                <a class="page-link" th:href="@{|/admin/rents/page/${pageNumber}|}" th:text="${pageNumber}">1</a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                    </nav>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2"></div>-->
+<!--                            </div>-->
                             <!-- Pagination End -->
                         </div>
                     </div>

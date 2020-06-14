@@ -41,7 +41,7 @@ public class RentServiceImpl implements RentService {
         Optional<RentStatus> rentStatus = rentStatusService.getById(502);
         rentStatus.ifPresent(rs -> rent.setRentStatus(rs));
 
-        Optional<Client> client = clientService.getById(501);
+        Optional<Client> client = clientService.getByUsername(rent.getClient().getUserName());
         client.ifPresent(c -> rent.setClient(c));
 
         Optional<Plane> plane = planeService.getById(rent.getPlane().getPlaneId());

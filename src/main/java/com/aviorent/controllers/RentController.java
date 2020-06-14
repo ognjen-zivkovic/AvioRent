@@ -2,6 +2,7 @@ package com.aviorent.controllers;
 
 import com.aviorent.dtos.PlaneWithImagesDto;
 import com.aviorent.dtos.RentDto;
+import com.aviorent.models.Client;
 import com.aviorent.models.CrewMember;
 import com.aviorent.models.Plane;
 import com.aviorent.models.Rent;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.standard.expression.GreaterOrEqualToExpression;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -93,7 +95,7 @@ public class RentController {
     public String ChoosePlane(Model model) {
         RentDto rentDto = (RentDto) model.asMap().get("rent");
         List<Plane> planes = this.planeService.getAll();
-        List<PlaneWithImagesDto> dto = new ArrayList<>();
+        List<PlaneWithImagesDto> dto = new ArrayList<PlaneWithImagesDto>();
 
         for (Plane p : planes) {
             PlaneWithImagesDto temp = new PlaneWithImagesDto();
@@ -115,18 +117,22 @@ public class RentController {
     }
 
     @RequestMapping(value = "/rents/submit", method = RequestMethod.POST)
-    public ModelAndView CreateRent(@Valid RentDto rentDto, BindingResult bindingResult, Model model) throws ParseException {
+    public ModelAndView CreateRent(@Valid RentDto rentDto, BindingResult bindingResult, Model model, Principal principal) throws ParseException {
         if(bindingResult.hasErrors()){
             return new ModelAndView("Rent/choosePlane");
         }
         else{
             Rent rent = new Rent();
+            rentDto.setClient(new Client());
+            rentDto.getClient().setUserName(principal.getName());
+
             rent.setPassengers(rentDto.getPassengers());
             rent.setDestinationFrom(rentDto.getDestinationFrom());
             rent.setDestinationTo(rentDto.getDestinationTo());
             rent.setDateStart(rentDto.getDateStart());
             rent.setRoundTrip(rentDto.isRoundTrip());
             rent.setPlane(rentDto.getPlane());
+            rent.setClient(rentDto.getClient());
 
             Rent savedRent = rentService.create(rent);
 
