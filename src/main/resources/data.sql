@@ -69,7 +69,7 @@ INSERT INTO plane(
 
 	INSERT INTO client(
 	client_id, email, password, phone, user_name, roles)
-	VALUES (501, 'boki-ilic@gmail.com', '123456', '063/456-789', 'boki', 'user');
+	VALUES (501, 'boki-ilic@gmail.com', '123456', '063/456-789', 'boki', 'ROLE_ADMIN');
 
 
 	INSERT INTO client(
@@ -121,7 +121,7 @@ INSERT INTO plane(
 
 	INSERT INTO rent(
 	rent_id, created_at, date_end, date_start, destination_from, destination_to, is_round_trip, passengers, client_id, plane_id, rent_status_id)
-	VALUES (501, '2020-06-01', '2020-07-01', '2020-06-15', 'BEG', 'HMD', true, 2, 501, 501, 501);
+	VALUES (501, '2020-06-01', '2020-06-30', '2020-06-11', 'BEG', 'HMD', true, 2, 501, 501, 501);
 
 		INSERT INTO rent(
 	rent_id, created_at, date_end, date_start, destination_from, destination_to, is_round_trip, passengers, client_id, plane_id, rent_status_id)

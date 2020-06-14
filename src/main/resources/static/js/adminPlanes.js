@@ -56,7 +56,7 @@ $(function () {
         var planeId = $(this).data('planeid');
         $.ajax({
             type: 'POST',
-            url: '/deletePlaneImage',
+            url: '/admin/deletePlaneImage',
             data: {id: id, planeId: planeId},
             dataType: 'json',
             success: function (response) {
@@ -94,7 +94,7 @@ $(function () {
                     $("#planeTableImg"+response.planeId).remove();
 
                 }
-                $('#imageModal').append('<form style="margin-top: 10px;" class="form-horizontal editImagesForm" method="POST" action="/addPlaneImage" enctype="multipart/form-data">\n' +
+                $('#imageModal').append('<form style="margin-top: 10px;" class="form-horizontal editImagesForm" method="POST" action="/admin/addPlaneImage" enctype="multipart/form-data">\n' +
                     '                    <input type="hidden" class="planeid" name="planeId" value="'+response.planeId+'">\n' +
                     '                    <div class="form-group">\n' +
                     '                        <label for="image" class="col-sm-3 control-label"></label>\n' +
@@ -123,7 +123,7 @@ $(function () {
 function getRow(id) {
     $.ajax({
         type: 'POST',
-        url: '/getRow',
+        url: '/admin/getRow',
         data: {id: id},
         dataType: 'json',
         success: function (response) {
@@ -164,7 +164,7 @@ function getRow(id) {
                 }
                 $('#imageModal').append('</table>');
             }
-            $('#imageModal').append('<form style="margin-top: 10px;" class="form-horizontal editImagesForm" method="POST" action="/addPlaneImage" enctype="multipart/form-data">\n' +
+            $('#imageModal').append('<form style="margin-top: 10px;" class="form-horizontal editImagesForm" method="POST" action="/admin/addPlaneImage" enctype="multipart/form-data">\n' +
                 '                    <input type="hidden" class="planeid" name="planeId" value="'+response.planeId+'">\n' +
                 '                    <div class="form-group">\n' +
                 '                        <label for="image" class="col-sm-3 control-label"></label>\n' +

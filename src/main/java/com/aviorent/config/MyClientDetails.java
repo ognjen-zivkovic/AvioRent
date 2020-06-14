@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -17,21 +18,20 @@ public class MyClientDetails implements UserDetails {
     private String password;
     private String email;
     private String phone;
-    private List<GrantedAuthority> authorities;
+    private List<SimpleGrantedAuthority> authorities;
 
     public MyClientDetails(Client client){
         this.userName = client.getUserName();
         this.password = client.getPassword();
         this.email = client.getEmail();
         this.phone = client.getPhone();
-        this.authorities = Arrays.stream(client.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        authorities = new ArrayList<>();
+        this.authorities.add(new SimpleGrantedAuthority(client.getRoles()));
     }
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends SimpleGrantedAuthority> getAuthorities() {
         return authorities;
     }
 

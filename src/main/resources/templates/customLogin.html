@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>✈ Avio Rent</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
+
 </head>
 <body>
 
     <!-- Background Video Section -->
     <div class="video_wrapper">
-        <video class="video_intro" autoplay loop controls>
-            <source th:src="@{/video/bg.mp4}" type="video/mp4">
+        <video class="video_intro" autoplay loop muted id="vid">
+            <source th:src="@{/video/bg.mp4}" type="video/mp4" >
             Your browser does not support HTML5 video.
         </video>
+        <script>
+            document.getElementById('vid').play();
+        </script>
     </div>
     <div class="black_overlay">
         <h1 class="🧠" id="demo"></h1>

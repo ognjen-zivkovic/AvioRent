@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
+
+
+</head>
+<body style="background-color: white; overflow-x: hidden;">
+    <nav class="nav_large">
+        <a href="#" class="logo-main">
+            <img th:src="@{/img/logo.png}" alt="">
+        </a>
+        <div class="nav_links">
+            <a class="link" href="login">Login</a>
+            <a class="link" href="signup">Register</a>
+        </div>
+    </nav>
+    <div class="home_hero">
+        <video class="video_home" id="vid" width="100%" autoplay loop muted>
+            <source th:src="@{/video/bg.mp4}" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <script>
+            document.getElementById('vid').play();
+        </script>
+    </div>
+    
+    <div class="reserve-flight">
+        <!-- -passangers
+        -from
+        -to 
+        -start date
+        -round -->
+        <form action="">
+            <div class="from_to">
+                <input class="flight-btn" type="text" placeholder="BGD">
+                <div class="from_arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+                </div>
+                <input class="flight-btn" type="text" placeholder="NYC">
+            </div>
+            <div class="flight_info_desc">
+                <label for="">Start date</label>
+                <input class="flight-btn" type="date">
+                <label for="">Number of Passingers</label>
+                <input class="flight-btn" type="number">
+                <label for="">Round Trip</label>
+                <select name="" id="" class="flight-btn">
+                    <option selected="selected" value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="home_flight_selection">
+                <button type="submit">RESERVE FLIGHT</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="steps">
+        <div class="step_item"><h1>1</h1>Define Trip</div>
+        <div class="step_item"><h1>2</h1>Choose Plain</div>
+        <div class="step_item"><h1>3</h1>Fly Away</div>
+    </div>
+
+    <h1 style="text-align: center;">Fly Travel</h1>
+
+    <div class="home-container">
+
+        <div class="home_item">
+            <img src="img/flight_img_plane_3.png" alt="">
+            <h1>Our fleet</h1>
+            <p>
+                FlyTravel gives you access to a global fleet of more than 7,000 private charter aircraft.
+            </p>
+        </div>
+
+        <div class="home_item">
+            <img src="img/flight_img_place_1.png" alt="">
+            <h1 style="margin-top: -19px;">Travel worldwide</h1>
+            <p>
+                Worldwide travel both for business and fun. Book your flight today.
+            </p>
+        </div>
+
+        <div class="home_item">
+            <img src="img/flight_img_crew_1.png" alt="">
+            <h1 style="margin-top: -19px;">Our experts</h1>
+            <p>
+                Our team stands at your service 24/7 for private jet flight prices and advice.
+            </p>    
+        </div>
+
+    </div>
+
+    <div class="testimonials">
+
+    </div>
+
+    <footer class="footer">
+        <ul class="soc-media">
+            <li>
+                <a href="#">
+                    <img src="/icons/facebook.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="/icons/youtube.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="/icons/linkedin.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="/icons/twitter.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="/icons/instagram.svg" alt="">
+                </a>
+            </li>
+        </ul>
+        <!-- <div class="phone">
+            <h3>Contact us </h3>
+            <p>hello@flytravel.com</p>
+        </div> -->
+        <div class="terms">
+            <p>
+                © Copyright 2020 FlyTravel Global Inc.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

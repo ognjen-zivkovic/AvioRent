@@ -12,26 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.persistence.Converter;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -49,10 +42,10 @@ public class PlaneController {
     @Autowired
     private RentService rentService;
 
-
-    @GetMapping(value = "/adminPlanes/page/{page}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(value = "/admin/planes/page/{page}")
     public ModelAndView adminPlanes(@PathVariable("page") int page) {
-        ModelAndView modelAndView = new ModelAndView("adminPlanes");
+        ModelAndView modelAndView = new ModelAndView("planes");
         PageRequest pageable = PageRequest.of(page - 1, 5, Sort.by("planeId").descending());
         Page<Plane> planePage = planeService.getPaginatedPlanes(pageable);
         int totalPages = planePage.getTotalPages();
@@ -95,9 +88,9 @@ public class PlaneController {
         return modelAndView;
     }
 
-    @GetMapping("/adminPlanes")
+    @GetMapping("/admin/planes")
     public String adminPlanes(Model model) {
-        return "redirect:/adminPlanes/page/1";
+        return "redirect:/admin/planes/page/1";
         /*List<Plane> planes = planeService.getAll();
         List<PlaneWithImagesDto> dto = new ArrayList<PlaneWithImagesDto>();
         Date currentDate = new Date();
@@ -135,7 +128,7 @@ public class PlaneController {
     }
 
 
-    @PostMapping("/newPlane")
+    @PostMapping("/admin/newPlane")
     public ModelAndView insertNewPlane(@ModelAttribute NewPlaneDto planeDto, RedirectAttributes redirectAttributes) {
         String uploadDirectory = System.getProperty("user.dir") + "/src/main/upload/static/planeImages";
         Plane newPlane = new Plane();
@@ -167,31 +160,31 @@ public class PlaneController {
 
         redirectAttributes.addFlashAttribute("newPlane", true);
 
-        return new ModelAndView("redirect:/adminPlanes/page/1");
+        return new ModelAndView("redirect:/admin/planes/page/1");
     }
 
-    @PostMapping("/getRow")
+    @PostMapping("/admin/getRow")
     public @ResponseBody
     Plane getPlaneByIdAjax(@RequestParam long id) {
         return planeService.getById(id).get();
     }
 
-    @PostMapping("/deletePlane")
+    @PostMapping("/admin/deletePlane")
     public ModelAndView deletePlane(@RequestParam long planeId, RedirectAttributes redirectAttributes) {
         planeService.deleteById(planeId);
         redirectAttributes.addFlashAttribute("planeDeleted", true);
-        return new ModelAndView("redirect:/adminPlanes/page/1");
+        return new ModelAndView("redirect:/admin/planes/page/1");
     }
 
-    @PostMapping("/editPlane")
+    @PostMapping("/admin/editPlane")
     public ModelAndView editPlane(@ModelAttribute Plane plane, RedirectAttributes redirectAttributes) {
         planeService.update(plane);
         redirectAttributes.addFlashAttribute("planeUpdated", true);
-        return new ModelAndView("redirect:/adminPlanes/page/1");
+        return new ModelAndView("redirect:/admin/planes/page/1");
     }
 
     @Transactional
-    @PostMapping("/deletePlaneImage")
+    @PostMapping("/admin/deletePlaneImage")
     public @ResponseBody
     Plane deletePlaneImage(@RequestParam long id, @RequestParam long planeId) {
         PlaneImage planeImage = planeImageService.getByPlaneImageId(id);
@@ -202,7 +195,7 @@ public class PlaneController {
         return plane;
     }
 
-    @PostMapping("/addPlaneImage")
+    @PostMapping("/admin/addPlaneImage")
     public ModelAndView addPlaneImage(@RequestParam MultipartFile[] image, @RequestParam int planeId, RedirectAttributes redirectAttributes) {
         String uploadDirectory = System.getProperty("user.dir") + "/src/main/upload/static/planeImages";
         Plane plane = planeService.getById(planeId).get();
@@ -223,7 +216,7 @@ public class PlaneController {
             }
         }
 
-        return new ModelAndView("redirect:/adminPlanes/page/1");
+        return new ModelAndView("redirect:/admin/planes/page/1");
     }
 
 }

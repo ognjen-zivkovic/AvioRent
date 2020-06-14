@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
 import javax.validation.Valid;
@@ -37,23 +38,22 @@ public class ClientController {
         return "client";
     }
 
-
-    @RequestMapping(value = "/client", method = RequestMethod.POST)
-    public String updateClient(@ModelAttribute Client client) {
+    @PostMapping(value = "/client")
+    public ModelAndView updateClient(@ModelAttribute Client client) {
+        ModelAndView model = new ModelAndView();
         clientService.update(client);
-        return "client";
+        model = new ModelAndView();
+        model.addObject("msg", "User has been registered successfully");
+        model.setViewName("/client");
+        return model;
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
         public ModelAndView index() {
         ModelAndView model = new ModelAndView();
-
-        model.setViewName("/index");
-
+        model.setViewName("/home");
         return model;
     }
-
-
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView signup(){
@@ -63,8 +63,6 @@ public class ClientController {
         model.setViewName("/signup");
         return model;
     }
-
-
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -87,11 +85,10 @@ public class ClientController {
         }
         else if (bindingResult.hasErrors()){
             model.setViewName("/signup");
-
             return model;
         }
         else{
-            client.setRoles("user");
+            client.setRoles("ROLE_USER");
             client.setPassword(passwordEncoder.encode(client.getPassword()));
             clientService.save(client);
             model.addObject("msg", "User has been registered successfully");
