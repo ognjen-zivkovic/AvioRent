@@ -34,8 +34,8 @@
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MANAGE</li>
-                <li><a href="/adminPlanes"><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
-                <li><a href="/crewmemberlist"><i class="fa fa-users"></i> <span>Crew members</span></a></li>
+                <li><a href="/admin/planes"><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
+                <li><a href="/admin/crewmemberlist"><i class="fa fa-users"></i> <span>Crew Members</span></a></li>
                 <li><a href="/admin/rents"><i class="fa fa-paper-plane"></i> <span>Rents</span></a></li>
             </ul>
         </section>
@@ -46,7 +46,7 @@
                 Rents
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Airplanes</li>
             </ol>
         </section>
@@ -55,7 +55,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <a href="#" th:href="@{/rents/create}" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i
+                            <a href="#" th:href="@{/home}" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i
                                     class="fa fa-plus"></i> New</a>
                         </div>
                         <div class="box-body">

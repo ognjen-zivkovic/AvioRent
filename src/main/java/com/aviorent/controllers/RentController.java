@@ -71,18 +71,18 @@ public class RentController {
         return "Rent/index";
     }
 
-    @GetMapping("rents/create")
+    @GetMapping("/home")
     public String CreateRentGet(Model model)
     {
         model.addAttribute("rent", new RentDto());
 
-        return "Rent/create";
+        return "home";
     }
 
     @RequestMapping(value = "/rents/next", method = RequestMethod.POST)
     public ModelAndView SubmitRentInfo(@Valid RentDto rent, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if(bindingResult.hasErrors()){
-            return new ModelAndView("Rent/create");
+            return new ModelAndView("home");
         }
         else{
             redirectAttributes.addFlashAttribute("rent", rent);
@@ -136,7 +136,7 @@ public class RentController {
 
             Rent savedRent = rentService.create(rent);
 
-            return new ModelAndView("redirect:/index");
+            return new ModelAndView("redirect:/home");
         }
     }
 

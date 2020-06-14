@@ -104,6 +104,7 @@ a:hover {
     position: fixed;
     left: calc(100% - 16rem);
     top: calc( 100% - 8rem);
+    z-index: 666;
 }
 
 .logo_form {

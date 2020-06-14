@@ -35,21 +35,21 @@
         -to 
         -start date
         -round -->
-        <form action="">
+        <form th:action="@{/rents/next}" method="POST" class="form" th:object="${rent}">
             <div class="from_to">
-                <input class="flight-btn" type="text" placeholder="BGD">
+                <input class="flight-btn" th:field="*{destinationFrom}" name="destinationFrom" id="destinationFrom" type="text" required placeholder="BGD">
                 <div class="from_arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
                 </div>
-                <input class="flight-btn" type="text" placeholder="NYC">
+                <input class="flight-btn" th:field="*{destinationTo}" name="destinationTo" id="destinationTo" type="text" required placeholder="NYC">
             </div>
             <div class="flight_info_desc">
-                <label for="">Start date</label>
-                <input class="flight-btn" type="date">
-                <label for="">Number of Passingers</label>
-                <input class="flight-btn" type="number">
-                <label for="">Round Trip</label>
-                <select name="" id="" class="flight-btn">
+                <label for="dateStart">Start date</label>
+                <input class="flight-btn" th:field="*{dateStart}" name="dateStart" id="dateStart" type="date" required>
+                <label for="passengers">Number of Passengers</label>
+                <input class="flight-btn" th:field="*{passengers}" name="passengers" id="passengers" type="text" required>
+                <label for="isRoundTrip">Round Trip</label>
+                <select th:value="*{roundTrip}" th:field="*{roundTrip}" name="isRoundTrip" id="isRoundTrip" class="flight-btn">
                     <option selected="selected" value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
