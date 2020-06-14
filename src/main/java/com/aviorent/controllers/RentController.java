@@ -71,6 +71,18 @@ public class RentController {
         return "Rent/index";
     }
 
+    // Dusan - all rents for user
+    @GetMapping("/allrents")
+    public String AllRents(Model model, Principal principal)
+    {
+        String name = principal.getName();
+
+        List<Rent> rents = this.rentService.getAllByUserName(name);
+        model.addAttribute("rents", rents);
+
+        return "/listAllReservations";
+    }
+
     @GetMapping("/home")
     public String CreateRentGet(Model model)
     {

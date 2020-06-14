@@ -18,4 +18,5 @@ public interface RentService {
     void approveById(long id);
     Rent getByPlane(Plane plane);
     Page<Rent> getPaginatedRents(Pageable pageable);
+    List<Rent> getAllByUserName(String username);
 }

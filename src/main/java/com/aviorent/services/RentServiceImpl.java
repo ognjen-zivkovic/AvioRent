@@ -5,6 +5,7 @@ import com.aviorent.models.Plane;
 import com.aviorent.models.Rent;
 import com.aviorent.models.RentStatus;
 import com.aviorent.repositories.RentRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,8 @@ public class RentServiceImpl implements RentService {
 
     @Autowired
     private PlaneService planeService;
+
+
 
     @Override
     public List<Rent> getAll() {
@@ -90,6 +93,13 @@ public class RentServiceImpl implements RentService {
     public Page<Rent> getPaginatedRents(Pageable pageable) {
 //        simulateSlowService();
         return this.rentRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Rent> getAllByUserName(String username) {
+        Optional<Client> user = clientService.getByUsername(username);
+
+        return rentRepository.findByClient(user.get());
     }
 
 //    private void simulateSlowService() {
