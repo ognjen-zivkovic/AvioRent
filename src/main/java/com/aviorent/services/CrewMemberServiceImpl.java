@@ -5,6 +5,7 @@ import com.aviorent.models.CrewMemberType;
 import com.aviorent.models.Plane;
 import com.aviorent.repositories.CrewMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,18 @@ public class CrewMemberServiceImpl implements CrewMemberService {
     }
 
     @Override
+    //@Cacheable("crewMembers")
     public Page<CrewMember> getPaginatedCrewMembers(Pageable pageable) {
+        //simulateSlowService();
         return this.crewMemberRepository.findAll(pageable);
     }
+
+     /*private void simulateSlowService() {
+        try {
+            long time = 5000L;
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
+    }*/
 }

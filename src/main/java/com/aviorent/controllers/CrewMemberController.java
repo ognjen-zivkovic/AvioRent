@@ -34,14 +34,14 @@ public class CrewMemberController {
     @Autowired
     private PlaneService planeService;
 
-    @GetMapping("/crewmemberlist")
+    @GetMapping("/admin/crewmemberlist")
     public String crewMembers(Model model){
        /* List<CrewMember> members = this.crewMemberService.getAll();
         model.addAttribute("members", members);
         model.addAttribute("crewMember", new CrewMember());
         model.addAttribute("type", crewMemberTypeService.getAll());
         model.addAttribute("plane", planeService.getAll());*/
-        return "redirect:/crewmemberlist/page/1";
+        return "redirect:/admin/crewmemberlist/page/1";
     }
 
 
@@ -56,19 +56,19 @@ public class CrewMemberController {
         else{
             CrewMember savedCrewMember = crewMemberService.save(crewMember);
             redirectAttrs.addFlashAttribute("newCrewMember", true);
-            return "redirect:/crewmemberlist/page/1";
+            return "redirect:/admin/crewmemberlist/page/1";
         }
     }
 
-    @RequestMapping("/delete/{id}")
+    @RequestMapping("/admin/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttrs) {
         crewMemberService.deleteById(id);
         redirectAttrs.addFlashAttribute("crewMemberDeleted", true);
-        return "redirect:/crewmemberlist/page/1";
+        return "redirect:/admin/crewmemberlist/page/1";
     }
 
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/admin/edit/{id}")
     public String edit(@PathVariable Long id, Model model, RedirectAttributes redirectAttrs) {
         model.addAttribute("cMember", crewMemberService.getById(id));
         model.addAttribute("cType", crewMemberTypeService.getAll());
@@ -77,18 +77,18 @@ public class CrewMemberController {
         return "/CrewMember/createForm";
     }
 
-    @RequestMapping(value = "/crewmemberlist/page/{page}")
-    public ModelAndView listCrewMembersPageByPage(@PathVariable("page") int page) {
+    @RequestMapping(value = "/admin/crewmemberlist/page/{page}")
+    public ModelAndView listCrewMembersPageByPage(@PathVariable("page") int page)
+    {
         ModelAndView modelAndView = new ModelAndView("/CrewMember/list");
-        PageRequest pageable = PageRequest.of(page - 1, 5, Sort.by("crewMemberId").descending());
+        PageRequest pageable = PageRequest.of(page - 1, 2, Sort.by("crewMemberId").descending());
         Page<CrewMember> crewMemberPage = crewMemberService.getPaginatedCrewMembers(pageable);
         int totalPages = crewMemberPage.getTotalPages();
         if(totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1,totalPages).boxed().collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
-        List<CrewMember> members = this.crewMemberService.getAll();
-        modelAndView.addObject("members", members);
+        modelAndView.addObject("members", crewMemberPage.getContent());
         modelAndView.addObject("crewMember", new CrewMember());
         modelAndView.addObject("type", crewMemberTypeService.getAll());
         modelAndView.addObject("plane", planeService.getAll());
