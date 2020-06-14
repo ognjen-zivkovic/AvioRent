@@ -24,11 +24,11 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/clients")
+    @GetMapping("/admin/clients")
     public String clients(Model model){
         List<Client> clients = this.clientService.getAll();
         model.addAttribute("clients", clients);
-        return "clients";
+        return "listAllClients";
     }
 
     @GetMapping("/client")
@@ -97,6 +97,15 @@ public class ClientController {
         }
 
         return model;
+    }
+
+    @RequestMapping("/clients/delete/{id}")
+    public String Delete(@PathVariable Long id, RedirectAttributes redirectAttrs) {
+        clientService.deleteById(id);
+
+        redirectAttrs.addFlashAttribute("message", "Client was deleted!");
+
+        return "redirect:/admin/clients";
     }
 
 }

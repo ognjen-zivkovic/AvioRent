@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes</title>
+    <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/toastr.css}">
+    <link rel="stylesheet" th:href="@{http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}">
+    <script src="https://use.fontawesome.com/37ac8fd460.js"></script>
+
+</head>
+<header class="main-header">
+
+    <a href="#" class="logo">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="/img/logo.png"
+                     class="img-circle" alt="User Image">
+            </div>
+        </div>
+    </a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+    </nav>
+</header>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">MANAGE</li>
+                <li><a href="/admin/planes"><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
+                <li><a href="/admin/crewmemberlist"><i class="fa fa-users"></i> <span>Crew Members</span></a></li>
+                <li><a href="/admin/rents"><i class="fa fa-paper-plane"></i> <span>Rents</span></a></li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Rents
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Airplanes</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <a href="#" th:href="@{/home}" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i
+                                    class="fa fa-plus"></i> New</a>
+                        </div>
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Roles</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="client : ${clients}">
+                                    <tr>
+                                        <td>
+                                            <span class='pull-right' th:text="${client.clientId}"></span>
+                                        </td>
+                                        <td>
+                                            <span class='pull-right' th:text="${client.userName}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${client.email}"></span>
+                                        </td>
+
+
+                                        <td>
+                                            <span class='pull-right' th:text="${client.phone}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class='pull-right' th:text="${client.roles}"></span>
+                                        </td>
+
+
+
+                                        <td>
+                                            <a href="#" th:href="@{/clients/delete/} + ${client.clientId}">
+                                                <button class='btn btn-danger btn-sm btn-flat'>Delete</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+
+                            <!-- Pagination Start -->
+                            <!--                            <div class="row" th:fragment="pagination">-->
+                            <!--                                <div class="col-md-2"></div>-->
+                            <!--                                <div class="col-md-8 pagination">-->
+                            <!--                                    <nav aria-label="Pagination">-->
+                            <!--                                        <ul class="pagination justify-content-center">-->
+                            <!--                                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >-->
+                            <!--                                                <a class="page-link" th:href="@{|/admin/rents/page/${pageNumber}|}" th:text="${pageNumber}">1</a>-->
+                            <!--                                            </li>-->
+                            <!--                                        </ul>-->
+                            <!--                                    </nav>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-md-2"></div>-->
+                            <!--                            </div>-->
+                            <!-- Pagination End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Delete -->
+<div class="modal fade" id="delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Deleting...</b></h4>
+            </div>
+            <form class="form-horizontal" method="POST" action="/clients/delete">
+                <div class="modal-body">
+                    <input type="hidden" class="clientId" name="clientId">
+                    <div class="text-center">
+                        <p>DELETE CLIENT</p>
+                        <h2 class="bold planeModel"></h2>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i
+                            class="fa fa-close"></i> Close
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete End -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/adminPlanes.js"></script>
+<script src="/js/toastr.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
+<th:block th:if="${clientDeleted != null}">
+    <script>toastr.success("Plane successfully deleted");</script>
+</th:block>
+</body>
+</html>
