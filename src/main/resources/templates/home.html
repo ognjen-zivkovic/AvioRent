@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th='http://www.thymeleaf.org'>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +17,23 @@
             <img th:src="@{/img/logo.png}" alt="">
         </a>
         <div class="nav_links">
-            <a class="link" href="login">Login</a>
-            <a class="link" href="signup">Register</a>
+            <div sec:authorize="isAuthenticated()">
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="link" href="/admin/rents">Dashboard</a>
+                    <a class="link" href="/logout">Sign out</a>
+                </div>
+                <div sec:authorize="hasRole('ROLE_USER')">
+                    <a class="link" href="/allrents">Flight history</a>
+                    <a class="link" href="/client">My profile</a>
+                    <a class="link" href="/logout">Sign out</a>
+                </div>
+            </div>
+
+            <div sec:authorize="!isAuthenticated()">
+                <a class="link" href="login">Login</a>
+                <a class="link" href="signup">Register</a>
+            </div>
+
         </div>
     </nav>
     <div class="home_hero">
@@ -38,16 +55,24 @@
         <form th:action="@{/rents/next}" method="POST" class="form" th:object="${rent}">
             <div class="from_to">
                 <input class="flight-btn" th:field="*{destinationFrom}" name="destinationFrom" id="destinationFrom" type="text" required placeholder="BGD">
+                <span th:if="${#fields.hasErrors('destinationFrom')}" th:errors="*{destinationFrom}" th:class="help-block">From Destination Errors</span>
+
                 <div class="from_arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
                 </div>
+
                 <input class="flight-btn" th:field="*{destinationTo}" name="destinationTo" id="destinationTo" type="text" required placeholder="NYC">
+                <span th:if="${#fields.hasErrors('destinationTo')}" th:errors="*{destinationTo}" th:class="help-block">To Destination Errors</span>
             </div>
             <div class="flight_info_desc">
                 <label for="dateStart">Start date</label>
                 <input class="flight-btn" th:field="*{dateStart}" name="dateStart" id="dateStart" type="date" required>
+                <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:class="help-block">Start Date Errors</span>
+
                 <label for="passengers">Number of Passengers</label>
                 <input class="flight-btn" th:field="*{passengers}" name="passengers" id="passengers" type="text" required>
+                <span th:if="${#fields.hasErrors('passengers')}" th:errors="*{passengers}" th:class="help-block">Passengers Errors</span>
+
                 <label for="isRoundTrip">Round Trip</label>
                 <select th:value="*{roundTrip}" th:field="*{roundTrip}" name="isRoundTrip" id="isRoundTrip" class="flight-btn">
                     <option selected="selected" value="true">Yes</option>

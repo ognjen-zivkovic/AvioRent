@@ -5,6 +5,7 @@
     <title>✈ Avio Rent</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/main.css}" href="../static/main.css">
+    <link rel="stylesheet" th:href="@{/css/toastr.css}">
 
 </head>
 <body>
@@ -24,7 +25,9 @@
     </div>
     <div class="login_wrapper">
         <form th:action="@{/login}" method="post" class="form">
-            <img th:src="@{/img/logo.png}" alt="" class="logo_form">
+            <a href="/home">
+                <img th:src="@{/img/logo.png}" alt="" class="logo_form">
+            </a>
             <h1>Fly Airlines</h1>
             <div th:if="${param.error}" class="alert alert-error">
                 Invalid username and password.
@@ -43,9 +46,10 @@
             <a class="link" href="/signup">Sign Up</a>
         </form>
     </div>
-
-<script>
-
-</script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/toastr.js"></script>
+    <th:block th:if="${LoginRequired != null}">
+        <script>toastr.info("You need to login to create reservation");</script>
+    </th:block>
 </body>
 </html>

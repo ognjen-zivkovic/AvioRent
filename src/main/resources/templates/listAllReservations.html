@@ -37,7 +37,6 @@
             <tr>
                 <th>Id</th>
                 <th>Date Start</th>
-                <th>Date End</th>
                 <th>From</th>
                 <th>To</th>
                 <th>Passengers</th>
@@ -45,8 +44,6 @@
                 <th>Plane</th>
                 <th>Client</th>
                 <th>Status</th>
-                <th>Approve</th>
-                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -58,10 +55,6 @@
 
                     <td>
                         <span class='pull-right' th:text="${rent.dateStart}"></span>
-                    </td>
-
-                    <td>
-                        <span class='pull-right' th:text="${rent.dateEnd}"></span>
                     </td>
 
                     <td>
@@ -89,11 +82,8 @@
                     </td>
 
                     <td>
-                        sdsds
                         <span class='pull-right' th:text="${rent.rentStatus.status}"></span>
                     </td>
-
-
                 </tr>
             </th:block>
             </tbody>

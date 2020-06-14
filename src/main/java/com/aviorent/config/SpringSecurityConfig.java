@@ -42,10 +42,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .and()
                .formLogin()
-               .loginPage("/login")
+               .loginPage("/login").defaultSuccessUrl("/home", true)
               .permitAll()
               .and()
-              .logout()
+              .logout().logoutSuccessUrl("/home")
               .permitAll();
 
     }
