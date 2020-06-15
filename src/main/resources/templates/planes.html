@@ -74,6 +74,8 @@
                 <li><a href="/admin/planes"><i class="fa fa-plane"></i> <span>Airplanes</span></a></li>
                 <li><a href="/admin/crewmemberlist"><i class="fa fa-users"></i> <span>Crew Members</span></a></li>
                 <li><a href="/admin/rents"><i class="fa fa-paper-plane"></i> <span>Rents</span></a></li>
+                <li><a href="/admin/clients"><i class="fa fa-user"></i> <span>Clients</span></a></li>
+
             </ul>
         </section>
     </aside>
@@ -162,6 +164,17 @@
                                             <button class='btn btn-danger btn-sm delete btn-flat'
                                                     th:attr="data-id=${plane.getPlaneId()}"><i class='fa fa-trash'></i>Delete
                                             </button>
+                                            <th:block th:if="${plane.currentlyRented}">
+                                                <form method="post" th:action="@{/admin/rentAvailable}" style="display: inline-block;">
+                                                    <input type="hidden" name="id" th:value="${plane.getPlaneId()}"/>
+                                                <button class='btn btn-info btn-sm info btn-flat'
+                                                        type="submit"><i
+                                                        class='fa fa-info'></i> Available
+
+                                                </button>
+                                                </form>
+                                            </th:block>
+
                                         </td>
 
                                     </tr>

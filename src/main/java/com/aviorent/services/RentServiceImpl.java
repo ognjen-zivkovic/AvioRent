@@ -102,6 +102,11 @@ public class RentServiceImpl implements RentService {
         return rentRepository.findByClient(user.get());
     }
 
+    @Override
+    public List<Rent> getAllByPlane(Plane plane) {
+        return this.rentRepository.getAllByPlane(plane);
+    }
+
 //    private void simulateSlowService() {
 //        try {
 //            long time = 5000L;

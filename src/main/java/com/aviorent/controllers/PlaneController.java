@@ -42,7 +42,7 @@ public class PlaneController {
     @Autowired
     private RentService rentService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     @GetMapping(value = "/admin/planes/page/{page}")
     public ModelAndView adminPlanes(@PathVariable("page") int page) {
         ModelAndView modelAndView = new ModelAndView("planes");
@@ -65,21 +65,39 @@ public class PlaneController {
                 dto.setPrice(plane.getPrice());
                 dto.setRange(plane.getRange());
                 dto.setSeats(plane.getSeats());
-                Rent rent = rentService.getByPlane(plane);
-                Date currentDate = new Date();
-                Date dateStart = null;
-                if (rent != null) {
-                    dateStart = rent.getDateStart();
-                    if (currentDate.before(dateStart)) {
-                        dto.setCurrentlyRented(false);
-                    } else if (currentDate.after(dateStart)) {
-                        Date dateEnd = rent.getDateEnd();
-                        if (currentDate.after(dateEnd))
-                            dto.setCurrentlyRented(false);
-                        else
-                            dto.setCurrentlyRented(true);
+                Rent rent = null;
+                List<Rent> rents = rentService.getAllByPlane(plane);
+                if(rents.size() > 0)
+                {
+
+                    for(int i=0;i<rents.size();i++)
+                    {
+                        if(!(rents.get(i).getDateStart().after(new Date())))
+                        {
+                            if(rent == null)
+                            {
+                                rent = rents.get(i);
+                            }
+                            else if(rents.get(i).getDateStart().after(rent.getDateStart()))
+                            {
+                                rent = rents.get(i);
+                            }
+                        }
                     }
                 }
+                if (rent != null) {
+                    if (rent.getDateEnd() != null)
+                    {
+                        dto.setCurrentlyRented(false);
+                    }
+
+                    else
+                    {
+                        dto.setCurrentlyRented(true);
+                    }
+
+                } else
+                    dto.setCurrentlyRented(false);
                 return dto;
             }
         });
@@ -127,6 +145,22 @@ public class PlaneController {
         return "adminPlanes";*/
     }
 
+    @PostMapping("/admin/rentAvailable")
+    public String rentAvailable(@RequestParam long id) {
+        Plane plane = planeService.getById(id).get();
+        List<Rent> rents = rentService.getAllByPlane(plane);
+        if (rents != null && rents.size() > 0) {
+            for (Rent r : rents) {
+                if (r.getDateEnd() == null) {
+                    r.setDateEnd(new Date());
+                    rentService.update(r);
+                }
+            }
+
+        }
+
+        return "redirect:/admin/planes/page/1";
+    }
 
     @PostMapping("/admin/newPlane")
     public ModelAndView insertNewPlane(@ModelAttribute NewPlaneDto planeDto, RedirectAttributes redirectAttributes) {

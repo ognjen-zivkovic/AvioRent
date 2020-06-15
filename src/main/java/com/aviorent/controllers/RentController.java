@@ -85,7 +85,7 @@ public class RentController {
         return "/listAllReservations";
     }
 
-    @GetMapping("/home")
+    @GetMapping(value ={"/home","","/"})
     public String Home(Model model)
     {
         model.addAttribute("rent", new RentDto());
@@ -121,6 +121,11 @@ public class RentController {
     @RequestMapping(value = "/rents/choosePlane", method = RequestMethod.GET)
     public String ChoosePlane(Model model) {
         RentDto rentDto = (RentDto) model.asMap().get("rent");
+        if(rentDto == null)
+        {
+            return "redirect:/home";
+        }
+
         List<Plane> planes = this.planeService.getAll();
         List<PlaneWithImagesDto> dto = new ArrayList<PlaneWithImagesDto>();
 

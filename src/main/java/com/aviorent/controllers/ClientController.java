@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -79,6 +80,18 @@ public class ClientController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+
+    @GetMapping("/default")
+    public String defaultAfterLogin(HttpServletRequest request)
+    {
+        if(request.isUserInRole("ROLE_ADMIN"))
+        {
+            return "redirect:/admin/planes/page/1";
+        }
+        return "redirect:/home";
+    }
+
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView createUser(@Valid Client client, BindingResult bindingResult){

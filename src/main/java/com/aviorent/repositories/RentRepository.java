@@ -13,4 +13,5 @@ public interface RentRepository extends JpaRepository<Rent, Long> {
     List<Rent> findByClient(Client client);
     Rent getByPlane(Plane plane);
     Page<Rent> findAll(Pageable pageable);
+    List<Rent> getAllByPlane(Plane plane);
 }

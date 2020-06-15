@@ -19,4 +19,5 @@ public interface RentService {
     Rent getByPlane(Plane plane);
     Page<Rent> getPaginatedRents(Pageable pageable);
     List<Rent> getAllByUserName(String username);
+    List<Rent> getAllByPlane(Plane plane);
 }

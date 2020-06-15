@@ -7,9 +7,8 @@ $(function () {
     });
 
 
-    $(document).ready(function() {
 
-    } );
+
 
     $(function () {
         $('#example1').DataTable({
