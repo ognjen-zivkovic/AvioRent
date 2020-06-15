@@ -372,6 +372,10 @@ a:hover {
     transition: all ease-Out 0.3s;
 }
 
+.plane_item img {
+    width: 100%;
+}
+
 .plane_item h3 {
     font-size: 1rem;
     text-transform: uppercase;
